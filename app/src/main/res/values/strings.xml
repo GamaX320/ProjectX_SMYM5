@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
-    <string name="app_name">ProjectX_SMYM5</string>
+    <string name="app_name">Show Me Your Money2</string>
     <string name="title_section1">Section 1</string>
     <string name="title_section2">Section 2</string>
     <string name="title_section3">Section 3</string>
@@ -11,5 +11,26 @@
     <string name="action_settings">Settings</string>
     <string name="title_activity_test">TestActivity</string>
     <string name="hello_world">Hello world!</string>
+
+    <!-- custom string -->
+    <string name="title_app">Show Me Your Money</string>
+    <string name="drawer_open">Menu opened</string>
+    <string name="drawer_close">Menu closed</string>
+    <string name="about_us">About Us</string>
+    <string name="title_account">Account</string>
+    <string name="title_expense">Expense</string>
+    <string name="title_activity_create_account">CreateAccount</string>
+    <string name="title_create_account">Create Account</string>
+    <string name="title_activity_create_expense">CreateExpense</string>
+    <string name="title_create_expense">Create Expense</string>
+
+    <string-array name="type_array">
+        <item>Food</item>
+        <item>Transport</item>
+        <item>Entertainment</item>
+        <item>Communication</item>
+        <item>Housing</item>
+        <item>Other</item>
+    </string-array>
 
 </resources>
