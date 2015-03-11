@@ -94,7 +94,6 @@
             android:scaleType="fitCenter"
             android:minWidth="80dp"
             android:minHeight="80dp"
-            android:onClick="createNewAcc"
             android:layout_alignParentBottom="true"
             android:layout_alignParentRight="true"
             android:layout_alignParentEnd="true" />

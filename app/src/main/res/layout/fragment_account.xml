@@ -41,6 +41,6 @@
         android:scaleType="fitCenter"
         android:minWidth="80dp"
         android:minHeight="80dp"
-        android:onClick="createNewAcc" />
+        android:onClick="createAccount" />
 
 </RelativeLayout>

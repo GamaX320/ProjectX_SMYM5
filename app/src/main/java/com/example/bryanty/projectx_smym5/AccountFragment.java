@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentManager;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -48,11 +49,24 @@ public class AccountFragment extends Fragment {
             @Override
             public void onClick(View v)
             {
-               // Intent intent=new Intent(getActivity(),CreateAccountActivity.class);
-               // startActivity(intent);
+//              Intent intent=new Intent(getActivity(),CreateAccount.class);
+//              startActivity(intent);
+                Fragment objFragment=new CreateAccountFragment();
+                FragmentManager fragmentManager = getFragmentManager();
+                fragmentManager.beginTransaction()
+                .replace(R.id.container,objFragment)
+                .addToBackStack(null)
+                .commit();
             }
         });
 
         return rootView;
     }
+//    public void createAccount(View v){
+//        Fragment objFragment=new ExpenseFragment();
+//        FragmentManager fragmentManager = getFragmentManager();
+//        fragmentManager.beginTransaction()
+//                .replace(R.id.container,objFragment)
+//                .commit();
+//    }
 }
