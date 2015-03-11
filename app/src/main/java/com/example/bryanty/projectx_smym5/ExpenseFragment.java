@@ -1,5 +1,6 @@
 package com.example.bryanty.projectx_smym5;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
@@ -54,8 +55,8 @@ public class ExpenseFragment extends Fragment {
             @Override
             public void onClick(View v)
             {
-                //Intent intent=new Intent(getActivity(),CreateExpenseActivity.class);
-                //startActivity(intent);
+                Intent intent=new Intent(getActivity(),CreateExpense.class);
+                startActivity(intent);
             }
         });
 
