@@ -14,20 +14,30 @@ import android.widget.ListAdapter;
 import android.widget.ListView;
 import android.widget.Toast;
 
+import com.example.bryanty.projectx_smym5.domain.Account;
+
+import java.util.List;
+
 /**
  * Created by BRYANTY on 28/02/2015.
  */
 public class AccountFragment extends Fragment {
     View rootView;
+    DBHandler dbHandler;
+
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         rootView = inflater.inflate(R.layout.fragment_account, container, false);
+
+        //load all account from database
+        dbHandler= new DBHandler(getActivity(),null,null,1);
+        List<Account> account = dbHandler.getAllAccount();
 
         //listview account
         String[] accountName={"Steve","Cindy","Mark","Justin","Robert"};
 
         //custom adapter
-        ListAdapter accountAdapter=new AccountRowAdapter(getActivity().getApplicationContext(), accountName);
+        ListAdapter accountAdapter=new AccountRowAdapter(getActivity().getApplicationContext(), account);
         ListView accountListView=(ListView)rootView.findViewById(R.id.listView_account);
         accountListView.setAdapter(accountAdapter);
 

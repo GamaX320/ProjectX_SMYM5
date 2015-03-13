@@ -15,12 +15,14 @@ public class Account {
     public Account(String _accName, int _accColor, double _accAmount) {
         this._accName = _accName;
         this._accColor = _accColor;
+        this._accAmount= _accAmount;
     }
 
     public Account(int _accID, String _accName, int _accColor, double _accAmount) {
         this._accID = _accID;
         this._accName = _accName;
         this._accColor = _accColor;
+        this._accAmount= _accAmount;
     }
 
     public int get_accID() {

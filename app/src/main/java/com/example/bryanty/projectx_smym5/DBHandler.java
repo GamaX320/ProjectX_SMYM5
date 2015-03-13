@@ -27,6 +27,9 @@ public class DBHandler extends SQLiteOpenHelper{
 
     public DBHandler(Context context, String name, SQLiteDatabase.CursorFactory factory, int version) {
         super(context, DATABASE_NAME, factory, DATABASE_VERSION);
+
+        //delete database
+        //context.deleteDatabase(DATABASE_NAME);
     }
 
     @Override
@@ -34,7 +37,7 @@ public class DBHandler extends SQLiteOpenHelper{
         String query= "CREATE TABLE " + TABLE_NAME + "(" +
                 COLUMN_ACC_ID + " INTEGER PRIMARY KEY AUTOINCREMENT," +
                 COLUMN_ACC_NAME + " TEXT," +
-                COLUMN_ACC_COLOR + " INTEGER" +
+                COLUMN_ACC_COLOR + " INTEGER," +
                 COLUMN_ACC_AMOUNT + " DOUBLE);";
 
         db.execSQL(query);
@@ -52,6 +55,8 @@ public class DBHandler extends SQLiteOpenHelper{
     public void addAccount(Account acoount){
         ContentValues values = new ContentValues();
         values.put(COLUMN_ACC_NAME, acoount.get_accName());
+        values.put(COLUMN_ACC_COLOR, acoount.get_accColor());
+        values.put(COLUMN_ACC_AMOUNT, acoount.get_accAmount());
         SQLiteDatabase db= getWritableDatabase();
         db.insert(TABLE_NAME,null,values);
         db.close();
@@ -79,6 +84,7 @@ public class DBHandler extends SQLiteOpenHelper{
                 Account userRecord = new Account();
                 userRecord.set_accName(cursor.getString(1));
                 userRecord.set_accColor(cursor.getInt(2));
+                userRecord.set_accAmount(cursor.getDouble(3));
 
                 records.add(userRecord);
                 cursor.moveToNext();
@@ -103,7 +109,7 @@ public class DBHandler extends SQLiteOpenHelper{
                 userRecord.set_accColor(cursor.getInt(2));
                 userRecord.set_accAmount(cursor.getDouble(3));
 
-                result= userRecord.get_accName() + "/"+userRecord.get_accColor()+ "/"+userRecord.get_accAmount();
+                result= userRecord.get_accName() + "/"+userRecord.get_accColor()+ "/"+userRecord.get_accAmount() + "\n";
                 cursor.moveToNext();
             }
         }

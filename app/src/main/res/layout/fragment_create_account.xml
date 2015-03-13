@@ -86,7 +86,8 @@
         android:background="#DEDEDE"
         android:minHeight="80dp"
         android:minWidth="80dp"
-        android:scaleType="fitCenter"/>
+        android:scaleType="fitCenter"
+        />
 
     <TextView
         android:layout_width="wrap_content"
@@ -94,9 +95,110 @@
         android:textAppearance="?android:attr/textAppearanceLarge"
         android:text="Large Text"
         android:id="@+id/textViewABC"
-        android:layout_below="@+id/editText_AccountAmount"
-        android:layout_toLeftOf="@+id/imageButtonAddAcc"
-        android:layout_toStartOf="@+id/imageButtonAddAcc"
-        android:layout_marginTop="71dp" />
+        android:inputType="textMultiLine"
+        android:layout_alignBottom="@+id/imageButtonCancelAcc"
+        android:layout_toRightOf="@+id/textView7"
+        android:layout_toEndOf="@+id/textView7" />
 
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:text="Avatar Color"
+        android:id="@+id/textView2"
+        android:layout_marginTop="30dp"
+        android:layout_below="@+id/editText_AccountAmount"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true" />
+
+    <ImageButton
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/imageButtonAvatar1"
+        android:src="@drawable/ic_avatar_black_1"
+        android:background="#DEDEDE"
+        android:minHeight="60dp"
+        android:minWidth="60dp"
+        android:scaleType="fitCenter"
+        android:layout_below="@+id/textView2"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true" />
+
+    <ImageButton
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/imageButtonAvatar2"
+        android:src="@drawable/ic_avatar_black_2"
+        android:background="#DEDEDE"
+        android:minHeight="60dp"
+        android:minWidth="60dp"
+        android:scaleType="fitCenter"
+        android:layout_below="@+id/textView2"
+        android:layout_toRightOf="@+id/imageButtonAvatar1"
+        android:layout_toEndOf="@+id/imageButtonAvatar1" />
+
+    <ImageButton
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/imageButtonAvatar3"
+        android:src="@drawable/ic_avatar_black_3"
+        android:background="#DEDEDE"
+        android:minHeight="60dp"
+        android:minWidth="60dp"
+        android:scaleType="fitCenter"
+        android:layout_below="@+id/textView2"
+        android:layout_alignRight="@+id/textViewABC"
+        android:layout_alignEnd="@+id/textViewABC" />
+
+    <ImageButton
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/imageButtonAvatar4"
+        android:src="@drawable/ic_avatar_black_4"
+        android:background="#DEDEDE"
+        android:minHeight="60dp"
+        android:minWidth="60dp"
+        android:scaleType="fitCenter"
+        android:layout_alignTop="@+id/imageButtonAvatar3"
+        android:layout_toLeftOf="@+id/imageButtonAddAcc"
+        android:layout_toStartOf="@+id/imageButtonAddAcc" />
+
+    <ImageButton
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/imageButtonAvatar5"
+        android:src="@drawable/ic_avatar_black_5"
+        android:background="#DEDEDE"
+        android:minHeight="60dp"
+        android:minWidth="60dp"
+        android:scaleType="fitCenter"
+        android:layout_alignTop="@+id/imageButtonAvatar4"
+        android:layout_toRightOf="@+id/imageButtonAvatar4"
+        android:layout_toEndOf="@+id/imageButtonAvatar4" />
+
+    <ImageButton
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/imageButtonAvatar6"
+        android:src="@drawable/ic_avatar_black_6"
+        android:background="#DEDEDE"
+        android:minHeight="60dp"
+        android:minWidth="60dp"
+        android:scaleType="fitCenter"
+        android:layout_alignTop="@+id/imageButtonAvatar7"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true" />
+
+    <ImageButton
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/imageButtonAvatar7"
+        android:src="@drawable/ic_avatar_black_7"
+        android:background="#DEDEDE"
+        android:minHeight="60dp"
+        android:minWidth="60dp"
+        android:scaleType="fitCenter"
+        android:layout_below="@+id/imageButtonAvatar2"
+        android:layout_toLeftOf="@+id/imageButtonAvatar3"
+        android:layout_toStartOf="@+id/imageButtonAvatar3" />
 </RelativeLayout>
