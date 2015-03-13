@@ -27,6 +27,7 @@ public class AccountRowAdapter extends ArrayAdapter<Account> {
         View customView= rowAccInflater.inflate(R.layout.adapter_account_row,parent,false);
 
         //String singleAcc= getItem(position);
+        //get each account based on the position
         Account singleAcc=getItem(position);
 
         TextView accAvatar=(TextView)customView.findViewById(R.id.textView_acc_avatar);

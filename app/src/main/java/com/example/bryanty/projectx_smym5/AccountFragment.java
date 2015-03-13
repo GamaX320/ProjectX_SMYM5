@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -31,7 +32,7 @@ public class AccountFragment extends Fragment {
 
         //load all account from database
         dbHandler= new DBHandler(getActivity(),null,null,1);
-        List<Account> account = dbHandler.getAllAccount();
+       final List<Account> account = dbHandler.getAllAccount();
 
         //listview account
         String[] accountName={"Steve","Cindy","Mark","Justin","Robert"};
@@ -49,6 +50,10 @@ public class AccountFragment extends Fragment {
                 // Intent intent = new Intent(getActivity(), nextactivity.class);
                 // startActivity(intent);
                 Toast.makeText(getActivity(), "Click ListItem Number " + position, Toast.LENGTH_LONG).show();
+
+                Account myAccount= account.get(position);
+                Log.v("MyActivity", "acc=" +myAccount.get_accID()); //print message to console
+
             }
         });
 
@@ -72,11 +77,4 @@ public class AccountFragment extends Fragment {
 
         return rootView;
     }
-//    public void createAccount(View v){
-//        Fragment objFragment=new ExpenseFragment();
-//        FragmentManager fragmentManager = getFragmentManager();
-//        fragmentManager.beginTransaction()
-//                .replace(R.id.container,objFragment)
-//                .commit();
-//    }
 }

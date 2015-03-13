@@ -82,6 +82,7 @@ public class DBHandler extends SQLiteOpenHelper{
         while(!cursor.isAfterLast()){
             if(cursor.getString(cursor.getColumnIndex("accName")) != null){
                 Account userRecord = new Account();
+                userRecord.set_accID(cursor.getInt(0));
                 userRecord.set_accName(cursor.getString(1));
                 userRecord.set_accColor(cursor.getInt(2));
                 userRecord.set_accAmount(cursor.getDouble(3));
@@ -94,26 +95,4 @@ public class DBHandler extends SQLiteOpenHelper{
         return records;
     }
 
-    //test
-    public String getAccount(){
-        String result="";
-        String query="SELECT * FROM "+TABLE_NAME +" WHERE 1";
-        SQLiteDatabase db= getWritableDatabase();
-
-        Cursor cursor = db.rawQuery(query, null);
-        cursor.moveToFirst();
-        while(!cursor.isAfterLast()){
-            if(cursor.getString(cursor.getColumnIndex("accName")) != null){
-                Account userRecord = new Account();
-                userRecord.set_accName(cursor.getString(1));
-                userRecord.set_accColor(cursor.getInt(2));
-                userRecord.set_accAmount(cursor.getDouble(3));
-
-                result= userRecord.get_accName() + "/"+userRecord.get_accColor()+ "/"+userRecord.get_accAmount() + "\n";
-                cursor.moveToNext();
-            }
-        }
-        cursor.close();
-        return result;
-    }
 }
