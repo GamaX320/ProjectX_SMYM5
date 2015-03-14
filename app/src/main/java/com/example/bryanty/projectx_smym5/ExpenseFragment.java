@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentManager;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -19,6 +20,7 @@ import android.widget.Toast;
  */
 public class ExpenseFragment extends Fragment {
     View rootView;
+    int test1;
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         rootView=inflater.inflate(R.layout.fragment_expense,container,false);
@@ -38,6 +40,7 @@ public class ExpenseFragment extends Fragment {
                 // Intent intent = new Intent(getActivity(), nextactivity.class);
                 // startActivity(intent);
                 Toast.makeText(getActivity(), "Click ListItem Number " + position, Toast.LENGTH_LONG).show();
+                test1=position;
             }
         });
 
@@ -55,11 +58,23 @@ public class ExpenseFragment extends Fragment {
             @Override
             public void onClick(View v)
             {
-                Intent intent=new Intent(getActivity(),CreateExpense.class);
-                startActivity(intent);
+                Fragment objFragment=new CreateExpenseFragment();
+                //pass value to another fragment
+                Bundle bundle = new Bundle();
+                bundle.putString("accountID","confg you are pass "+test1);
+                objFragment.setArguments(bundle);
+                //ready to replace next fragment
+                FragmentManager fragmentManager = getFragmentManager();
+                fragmentManager.beginTransaction()
+                        .replace(R.id.container,objFragment)
+                        .addToBackStack(null)
+                        .commit();
             }
         });
 
         return rootView;
     }
+
+
+
 }
