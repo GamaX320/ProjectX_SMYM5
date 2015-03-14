@@ -6,7 +6,9 @@ import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.Spinner;
+import android.widget.Toast;
 
 import com.example.bryanty.projectx_smym5.domain.Account;
 
@@ -31,6 +33,18 @@ public class ExpenseTopFragment extends Fragment {
         Spinner spinner = (Spinner) rootView.findViewById(R.id.spinner_expense_account_top);
         ExpenseAccountAdapter expenseAccountAdapter= new ExpenseAccountAdapter(getActivity().getApplicationContext(),account);
         spinner.setAdapter(expenseAccountAdapter);
+        spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener(){
+            @Override
+            public void  onItemSelected(AdapterView<?> parent,View view,int position,long id){
+                Toast.makeText(getActivity(), "account selected > " + account.get(position).get_accID(), Toast.LENGTH_SHORT).show();
+
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
+
+            }
+        });
 
         return rootView;
 

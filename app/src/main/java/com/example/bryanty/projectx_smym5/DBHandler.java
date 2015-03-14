@@ -32,6 +32,7 @@ public class DBHandler extends SQLiteOpenHelper{
     public static final String COLUMN_EXP_ID ="expID";
     public static final String COLUMN_EXP_TYPE ="expType";
     public static final String COLUMN_EXP_AMOUNT ="expAmount";
+    public static final String COLUMN_EXP_DATE ="expDate";
     public static final String COLUMN_EXP_ACC_ID ="accID";
 
     public DBHandler(Context context, String name, SQLiteDatabase.CursorFactory factory, int version) {
@@ -55,6 +56,7 @@ public class DBHandler extends SQLiteOpenHelper{
                 COLUMN_EXP_ID + " INTEGER PRIMARY KEY AUTOINCREMENT," +
                 COLUMN_EXP_TYPE + " TEXT," +
                 COLUMN_EXP_AMOUNT + " DOUBLE," +
+                COLUMN_EXP_DATE + " TEXT," +
                 COLUMN_EXP_ACC_ID + " INTEGER, FOREIGN KEY ("+COLUMN_EXP_ACC_ID +") REFERENCES "+TABLE_NAME +" ("+COLUMN_ACC_ID +"));";
 
         db.execSQL(query);
@@ -121,6 +123,7 @@ public class DBHandler extends SQLiteOpenHelper{
         ContentValues values = new ContentValues();
         values.put(COLUMN_EXP_TYPE, expense.get_expType());
         values.put(COLUMN_EXP_AMOUNT, expense.get_expAmount());
+        values.put(COLUMN_EXP_DATE, expense.get_expDate());
         values.put(COLUMN_EXP_ACC_ID, expense.get_accID());
         SQLiteDatabase db= getWritableDatabase();
         db.insert(TABLE_NAME2,null,values);
@@ -150,7 +153,8 @@ public class DBHandler extends SQLiteOpenHelper{
                 userRecord.set_expID(cursor.getInt(0));
                 userRecord.set_expType(cursor.getString(1));
                 userRecord.set_expAmount(cursor.getDouble(2));
-                userRecord.set_accID(cursor.getInt(3));
+                userRecord.set_expDate(cursor.getString(3));
+                userRecord.set_accID(cursor.getInt(4));
 
                 records.add(userRecord);
                 cursor.moveToNext();

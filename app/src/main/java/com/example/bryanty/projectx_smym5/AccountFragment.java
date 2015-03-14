@@ -53,7 +53,6 @@ public class AccountFragment extends Fragment {
 
                 Account myAccount= account.get(position);
                 Log.v("MyActivity", "acc=" +myAccount.get_accID()); //print message to console
-
             }
         });
 

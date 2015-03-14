@@ -34,10 +34,6 @@ public class AccountRowAdapter extends ArrayAdapter<Account> {
         TextView accName=(TextView)customView.findViewById(R.id.textView_acc_name);
         TextView accAmount=(TextView)customView.findViewById(R.id.textView_acc_amount);
 
-//        accAvatar.setText(singleAcc.substring(0,1));
-//        accName.setText(singleAcc);
-//        accAmount.setText("RM50.00");
-
         //check selected avatar color
         int selectedAvatar= singleAcc.get_accColor();
         switch (selectedAvatar){
