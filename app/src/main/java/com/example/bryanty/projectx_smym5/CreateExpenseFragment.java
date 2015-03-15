@@ -1,6 +1,7 @@
 package com.example.bryanty.projectx_smym5;
 
 import android.app.DatePickerDialog;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
@@ -21,6 +22,7 @@ import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.ImageButton;
+import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.Spinner;
 import android.widget.Toast;
@@ -54,7 +56,11 @@ public class CreateExpenseFragment extends Fragment {
     String formatedDate;
     Date formatedDate_date;
     RadioGroup radioGroupRepeat;
-    Integer dayAfter;
+    Integer dayAfter = 0;
+    RadioButton radioButtonOnce;
+    RadioButton radioButtonDaily;
+    RadioButton radioButtonWeekly;
+    RadioButton radioButtonMonthly;
 
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
@@ -67,6 +73,14 @@ public class CreateExpenseFragment extends Fragment {
         expAmmount = (EditText)rootView.findViewById(R.id.editText_ExpAmmount);
         expTimes = (EditText)rootView.findViewById(R.id.editText_times);
         radioGroupRepeat= (RadioGroup)rootView.findViewById(R.id.radioGroup_repeat);
+        radioButtonOnce= (RadioButton)rootView.findViewById(R.id.radioButton_once);
+        radioButtonDaily= (RadioButton)rootView.findViewById(R.id.radioButton_daily);
+        radioButtonWeekly= (RadioButton)rootView.findViewById(R.id.radioButton_weekly);
+        radioButtonMonthly= (RadioButton)rootView.findViewById(R.id.radioButton_monthly);
+        //default get today date
+        Calendar c = Calendar.getInstance();
+        SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd");
+        formatedDate = df.format(c.getTime());
 
         //initial the spinner
         spinner= (Spinner)rootView.findViewById(R.id.spinner_expense_type);
@@ -141,15 +155,24 @@ public class CreateExpenseFragment extends Fragment {
                 Log.d("chk", "id" + checkedId);
 
                 if (checkedId == R.id.radioButton_weekly) {
-                    //min 1, max 52 because 1 year only 52 weeks
-                    expTimes.setFilters(new InputFilter[]{ new InputFilterMinMax("1", "52")});
+                    //min 1, max 4 because 1 month only 4 weeks
+                    expTimes.setEnabled(true);
+                    expTimes.setFilters(new InputFilter[]{ new InputFilterMinMax("1", "4")});
                     dayAfter=7;
                 } else if (checkedId ==R.id.radioButton_monthly) {
                     //min 1, max 12 because 1 year only 12 months
+                    expTimes.setEnabled(true);
                     expTimes.setFilters(new InputFilter[]{ new InputFilterMinMax("1", "12")});
                     dayAfter=30;
                 }
+                else if (checkedId ==R.id.radioButton_daily){
+                    //min 1, max 7 because 1 weak only 7 days
+                    expTimes.setEnabled(true);
+                    expTimes.setFilters(new InputFilter[]{ new InputFilterMinMax("1", "7")});
+                    dayAfter=1;
+                }
                 else{
+                    expTimes.setEnabled(false);
                     dayAfter=0;
                 }
 
@@ -166,9 +189,25 @@ public class CreateExpenseFragment extends Fragment {
             {
                 dbHandler= new DBHandler(getActivity(),null,null,1);
 
-                Expense expense=new Expense(expType,Double.parseDouble(expAmmount.getText().toString()),formatedDate,accID);
+                if(expAmmount.getText().toString().equals("") || expAmmount.getText().length() == 0){
+                    expAmmount.setFocusable(true);
+                    expAmmount.setHint("Please enter amount");
+                    expAmmount.setHintTextColor(Color.RED);
+                }
+                else{
+//                Expense expense=new Expense(expType,Double.parseDouble(expAmmount.getText().toString()),formatedDate,accID);
 
-                int repeat = Integer.parseInt(expTimes.getText().toString());
+               // int repeat = Integer.parseInt(expTimes.getText().toString());
+                int repeat = 1;
+
+                //check whether the rapeat radio button checked or not
+                if(radioButtonWeekly.isChecked() || radioButtonMonthly.isChecked() || radioButtonDaily.isChecked()){
+                    repeat = Integer.parseInt(expTimes.getText().toString());
+                }
+                else{
+                    repeat= 1;
+                }
+
                 Log.v("MyActivity", "repeat=" + repeat); //print message to console
 
 //                ///////////////
@@ -183,30 +222,56 @@ public class CreateExpenseFragment extends Fragment {
 //                }
 //                c.add(Calendar.DATE, 7);  // number of days to add, can also use Calendar.DAY_OF_MONTH in place of Calendar.DATE
 //                String output = sdf.format(c.getTime());
-//                Log.v("MyActivity", "day add=" + output); //print message to console
 
-                formatedDate= addMoreDay(formatedDate,dayAfter);
+//                formatedDate= addMoreDay(formatedDate,dayAfter);exi
 
-                dbHandler.addExpense(expense);
-
-                //update account amount
                 boolean result = false;
-                Account account = new Account();
-                account.set_accID(accID);
-                account.set_accAmount(Double.parseDouble(expAmmount.getText().toString()));
-                result = dbHandler.updateAccount(account,1);
+
+                for(int a=1; a<= repeat; a++){
+                    Log.v("MyActivity", "day add=" +formatedDate); //print message to console
+                    Expense expense=new Expense(expType,Double.parseDouble(expAmmount.getText().toString()),formatedDate,accID);
+
+                    dbHandler.addExpense(expense);
+
+                    //update account amount
+                    Account account = new Account();
+                    account.set_accID(accID);
+                    account.set_accAmount(Double.parseDouble(expAmmount.getText().toString()));
+                    result = dbHandler.updateAccount(account,1);
+
+                    if(dayAfter > 0) {
+                        formatedDate = addMoreDay(formatedDate, dayAfter);
+                        //Log.v("MyActivity", "day add=" +formatedDate); //print message to console
+                    }
+                }
 
                 if(result == true){
                     Toast.makeText(getActivity(), "Successful create expense" , Toast.LENGTH_LONG).show();
                 }
 
-//                //back to account fragment
-//                Fragment objFragment=new ExpenseFragment();
-//                FragmentManager fragmentManager = getFragmentManager();
-//                fragmentManager.beginTransaction()
-//                        .replace(R.id.container,objFragment)
-//                        .addToBackStack(null)
-//                        .commit();
+                //back to expense fragment
+                Fragment objFragment=new ExpenseFragment();
+                FragmentManager fragmentManager = getFragmentManager();
+                fragmentManager.beginTransaction()
+                        .replace(R.id.container,objFragment)
+                        .addToBackStack(null)
+                        .commit();
+            }   }
+        });
+
+        btnCancel=(ImageButton) rootView.findViewById(R.id.imageButtonCancelExp);
+        btnCancel.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                //back to account fragment
+                Fragment objFragment=new ExpenseFragment();
+                FragmentManager fragmentManager = getFragmentManager();
+                fragmentManager.beginTransaction()
+                        .replace(R.id.container,objFragment)
+                        .addToBackStack(null)
+                        .commit();
+
+
             }
         });
 

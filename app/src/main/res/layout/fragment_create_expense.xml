@@ -73,11 +73,27 @@
 
     <RadioGroup
         android:layout_width="150dp"
-        android:layout_height="60dp"
+        android:layout_height="130dp"
         android:id="@+id/radioGroup_repeat"
         android:layout_below="@+id/textView18"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true">
+
+        <RadioButton
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/title_create_expense_once"
+            android:id="@+id/radioButton_once"
+            android:checked="true"
+            android:textColor="#000" />
+
+        <RadioButton
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/title_create_expense_daily"
+            android:id="@+id/radioButton_daily"
+            android:checked="false"
+            android:textColor="#000" />
 
         <RadioButton
             android:layout_width="wrap_content"
@@ -106,7 +122,8 @@
         android:layout_alignBottom="@+id/radioGroup_repeat"
         android:layout_toRightOf="@+id/radioGroup_repeat"
         android:layout_toEndOf="@+id/radioGroup_repeat"
-        android:maxLength="2" />
+        android:maxLength="2"
+        android:enabled="false" />
 
     <TextView
         android:layout_width="wrap_content"

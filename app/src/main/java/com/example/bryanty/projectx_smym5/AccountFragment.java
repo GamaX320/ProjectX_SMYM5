@@ -53,6 +53,19 @@ public class AccountFragment extends Fragment {
 
                 Account myAccount= account.get(position);
                 Log.v("MyActivity", "acc=" +myAccount.get_accID()); //print message to console
+
+                /////
+                Fragment objFragment=new UpdateAccountFragment();
+                //pass value to another fragment
+                Bundle bundle = new Bundle();
+                bundle.putInt("accountID",account.get(position).get_accID());
+                objFragment.setArguments(bundle);
+                //ready to replace next fragment
+                FragmentManager fragmentManager = getFragmentManager();
+                fragmentManager.beginTransaction()
+                        .replace(R.id.container,objFragment)
+                        .addToBackStack(null)
+                        .commit();
             }
         });
 

@@ -119,6 +119,31 @@ public class DBHandler extends SQLiteOpenHelper{
         return records;
     }
 
+    //retrieve account from database
+    public Account getAccount(int accountID){
+        String query="SELECT * FROM  "+TABLE_NAME +" WHERE "+COLUMN_ACC_ID + "=\"" +accountID +"\";";
+        SQLiteDatabase db= getWritableDatabase();
+
+        Account account =new Account();
+        //cursor point to your location
+        Cursor cursor = db.rawQuery(query, null);
+        //move to first row in your result
+        cursor.moveToFirst();
+
+        while(!cursor.isAfterLast()){
+            if(cursor.getString(cursor.getColumnIndex("accName")) != null){
+                account.set_accID(cursor.getInt(0));
+                account.set_accName(cursor.getString(1));
+                account.set_accColor(cursor.getInt(2));
+                account.set_accAmount(cursor.getDouble(3));
+
+                cursor.moveToNext();
+            }
+        }
+        cursor.close();
+        return account;
+    }
+
     public boolean updateAccount(Account account,int method){
         boolean result=false;
 

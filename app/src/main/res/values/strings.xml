@@ -23,6 +23,8 @@
     <string name="title_create_account">Create Account</string>
     <string name="title_activity_create_expense">CreateExpense</string>
     <string name="title_create_expense">Create Expense</string>
+    <string name="title_create_expense_once">Once</string>
+    <string name="title_create_expense_daily">Daily</string>
     <string name="title_create_expense_monthly">Monthly</string>
     <string name="title_create_expense_weekly">Weekly</string>
 

@@ -21,12 +21,13 @@ import com.example.bryanty.projectx_smym5.domain.Account;
 import java.util.List;
 
 /**
- * Created by BRYANTY on 08/03/2015.
+ * Created by BRYANTY on 15/03/2015.
  */
-public class CreateAccountFragment extends Fragment implements OnClickListener {
+public class UpdateAccountFragment extends Fragment  implements OnClickListener {
     View rootView;
     DBHandler dbHandler;
 
+    TextView title;
     EditText accName;
     EditText accAmount;
 
@@ -43,8 +44,30 @@ public class CreateAccountFragment extends Fragment implements OnClickListener {
     //selected avatar index
     Integer selectedAvatar=0;
 
+    int accID;
+
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         rootView = inflater.inflate(R.layout.fragment_create_account, container, false);
+
+        //get value from previous fragment
+        Bundle bundle = this.getArguments();
+        accID= bundle.getInt("accountID");;
+
+        accName = (EditText)rootView.findViewById(R.id.editText_AccountName);
+        accAmount = (EditText)rootView.findViewById(R.id.editText_AccountAmount);
+
+        //get account information
+        Account account = new Account();
+        dbHandler= new DBHandler(getActivity(),null,null,1);
+        account= dbHandler.getAccount(accID);
+        Log.v("MyActivity", "1=" + accID); //print message to console
+        Log.v("MyActivity", "asdasdasd=" + account.get_accName()); //print message to console
+        //load account information
+        accName.setText(account.get_accName());
+        accAmount.setText(""+account.get_accAmount());
+
+        title= (TextView)rootView.findViewById(R.id.textView5);
+        title.setText("Update Account");
 
         btnAdd=(ImageButton) rootView.findViewById(R.id.imageButtonAddAcc);
         btnAdd.setOnClickListener(new View.OnClickListener()
@@ -52,8 +75,6 @@ public class CreateAccountFragment extends Fragment implements OnClickListener {
             @Override
             public void onClick(View v)
             {
-                accName = (EditText)rootView.findViewById(R.id.editText_AccountName);
-                accAmount = (EditText)rootView.findViewById(R.id.editText_AccountAmount);
                 dbHandler= new DBHandler(getActivity(),null,null,1);
 
                 if(accName.getText().toString().equals("") || accName.getText().toString().length() == 0){
@@ -67,11 +88,13 @@ public class CreateAccountFragment extends Fragment implements OnClickListener {
                     accAmount.setHintTextColor(Color.RED);
                 }
                 else {
-                    Account account = new Account(accName.getText().toString(), selectedAvatar, Double.parseDouble(accAmount.getText().toString()));
-                    dbHandler.addAccount(account);
-                    Log.v("MyActivity", "index=" + Double.parseDouble(accAmount.getText().toString())); //print message to console
-                    Toast.makeText(getActivity(), "Successful create account", Toast.LENGTH_LONG).show();
-                    printDatabase();
+                    boolean result =false;
+                    Account account = new Account(accID,accName.getText().toString(), selectedAvatar, Double.parseDouble(accAmount.getText().toString()));
+                    result= dbHandler.updateAccount(account,2);
+
+                    if(result == true){
+                        Toast.makeText(getActivity(), "Successful update account", Toast.LENGTH_LONG).show();
+                    }
 
                     //back to account fragment
                     Fragment objFragment = new AccountFragment();
@@ -165,18 +188,5 @@ public class CreateAccountFragment extends Fragment implements OnClickListener {
         }
 
         Log.v("MyActivity", "selected=" + selectedAvatar); //print message to console
-    }
-
-    public void printDatabase(){
-        TextView abc;
-
-        List<Account> values = dbHandler.getAllAccount();
-
-//        while(values != null){
-//            abc.setText(values.toString());
-//        }
-
-        accName.setText("");
-        accAmount.setText("");
     }
 }
