@@ -3,77 +3,62 @@
     android:orientation="vertical" android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textAppearance="?android:attr/textAppearanceLarge"
-        android:text="@string/title_expense"
-        android:id="@+id/textView8"
-        android:layout_alignParentTop="true"
-        android:layout_centerHorizontal="true" />
-
-    <TextView
-        android:layout_width="80dp"
-        android:layout_height="80dp"
-        android:textAppearance="?android:attr/textAppearanceLarge"
-        android:text="L"
-        android:id="@+id/textView_expense_item_avatar"
-        android:layout_below="@+id/textView8"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="34dp"
-        android:layout_margin="5dp"
-        android:gravity="center_vertical|center_horizontal"
-        android:textSize="30dp"
-        android:background="@drawable/ic_avatar_black_2"
-        android:textColor="#fff" />
-
-    <TextView
+    <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:textAppearance="?android:attr/textAppearanceLarge"
-        android:text="Name"
-        android:id="@+id/textView_expense_item_name"
-        android:layout_below="@+id/textView_expense_item_avatar"
-        android:layout_centerHorizontal="true"
-        android:gravity="center" />
+        android:layout_height="150dp"
+        android:id="@+id/expense_layout_1">
 
-    <ListView
+        <Spinner
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/spinner_expense_account_top"
+            android:layout_gravity="center_horizontal"
+            android:spinnerMode="dropdown"
+            android:background="#78909c" />
+    </RelativeLayout>
+
+   <!-- <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:id="@+id/listView_expense_item"
-        android:layout_below="@+id/textView_expense_item_name"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="25dp"
+        android:id="@+id/expense_layout_2"
+        android:layout_below="@+id/expense_layout_1"
+        android:layout_marginTop="20dp"
+        android:layout_marginBottom="20dp"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp">
+
+        <fragment
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:name="com.example.bryanty.projectx_smym5.ExpenseDownFragment"
+            android:id="@+id/f2"
+            android:layout_centerVertical="true"
+            android:layout_centerHorizontal="true" />
+    </RelativeLayout>-->
+
+    <FrameLayout
+        android:id="@+id/container_expense"
+        android:layout_width="match_parent"
+        android:clickable="true"
+        android:layout_height="match_parent"
+        android:layout_marginTop="20dp"
         android:layout_marginBottom="20dp"
         android:layout_marginLeft="10dp"
         android:layout_marginRight="10dp"
-        android:choiceMode="singleChoice"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true" />
-
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:textAppearance="?android:attr/textAppearanceLarge"
-        android:text="Total Amount"
-        android:id="@+id/textView_expense_amount"
-        android:layout_below="@+id/textView_expense_item_name"
-        android:layout_centerHorizontal="true"
-        android:gravity="center" />
+        android:layout_below="@+id/expense_layout_1"/>
 
     <ImageButton
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:id="@+id/imageButton_add_expense"
-        android:layout_alignBottom="@+id/listView_expense_item"
-        android:layout_alignRight="@+id/listView_expense_item"
-        android:layout_alignEnd="@+id/listView_expense_item"
         android:src="@drawable/ic_add"
         android:background="#DEDEDE"
-        android:layout_margin="1dp"
         android:minHeight="80dp"
         android:minWidth="80dp"
         android:clickable="true"
-        android:scaleType="fitCenter" />
+        android:scaleType="fitCenter"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true" />
 
 </RelativeLayout>

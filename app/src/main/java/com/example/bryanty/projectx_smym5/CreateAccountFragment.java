@@ -31,6 +31,7 @@ public class CreateAccountFragment extends Fragment implements OnClickListener {
     EditText accAmount;
 
     ImageButton btnAdd;
+    ImageButton btnCancel;
     ImageButton btnAvatar1;
     ImageButton btnAvatar2;
     ImageButton btnAvatar3;

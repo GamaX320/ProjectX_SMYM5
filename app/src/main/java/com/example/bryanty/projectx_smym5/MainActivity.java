@@ -10,8 +10,8 @@ import android.view.Menu;
 import android.widget.Toast;
 
 
-public class MainActivity extends ActionBarActivity implements NavigationDrawerCallbacks {
-
+//public class MainActivity extends ActionBarActivity implements NavigationDrawerCallbacks, ExpenseFragment.SendMessage{
+public class MainActivity extends ActionBarActivity implements NavigationDrawerCallbacks{
     private Toolbar mToolbar;
     private NavigationDrawerFragment mNavigationDrawerFragment;
 
@@ -73,4 +73,11 @@ public class MainActivity extends ActionBarActivity implements NavigationDrawerC
         else
             super.onBackPressed();
     }
+
+//    //send data to communication between fragment
+//    @Override
+//    public void sendData(String message) {
+//        ExpenseDownFragment f2= (ExpenseDownFragment)getSupportFragmentManager().findFragmentById(R.id.f2);
+//         f2.getData(message);
+//    }
 }

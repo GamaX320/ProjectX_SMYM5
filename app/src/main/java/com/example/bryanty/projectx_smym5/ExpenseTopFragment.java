@@ -1,8 +1,10 @@
 package com.example.bryanty.projectx_smym5;
 
+import android.app.Activity;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentManager;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -21,6 +23,8 @@ public class ExpenseTopFragment extends Fragment {
     View rootView;
     DBHandler dbHandler;
 
+//    SendMessage SM;
+
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         rootView=inflater.inflate(R.layout.fragment_expense_top,container,false);
@@ -38,6 +42,18 @@ public class ExpenseTopFragment extends Fragment {
             public void  onItemSelected(AdapterView<?> parent,View view,int position,long id){
                 Toast.makeText(getActivity(), "account selected > " + account.get(position).get_accID(), Toast.LENGTH_SHORT).show();
 
+                 Fragment objFragment=new ExpenseDownFragment();
+                //pass value to another fragment
+                Bundle bundle = new Bundle();
+                bundle.putString("accountID","finally u do it "+account.get(position).get_accID());
+                objFragment.setArguments(bundle);
+                //ready to replace next fragment
+                FragmentManager fragmentManager = getFragmentManager();
+                fragmentManager.beginTransaction()
+                        .replace(R.id.container_expense,objFragment)
+                        .addToBackStack(null)
+                        .commit();
+
             }
 
             @Override
@@ -47,6 +63,5 @@ public class ExpenseTopFragment extends Fragment {
         });
 
         return rootView;
-
     }
 }

@@ -148,7 +148,7 @@ public class DBHandler extends SQLiteOpenHelper{
         cursor.moveToFirst();
 
         while(!cursor.isAfterLast()){
-            if(cursor.getString(cursor.getColumnIndex("accName")) != null){
+            if(cursor.getString(cursor.getColumnIndex("expType")) != null){
                 Expense userRecord = new Expense();
                 userRecord.set_expID(cursor.getInt(0));
                 userRecord.set_expType(cursor.getString(1));
