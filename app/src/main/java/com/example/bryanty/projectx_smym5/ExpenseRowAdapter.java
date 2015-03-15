@@ -9,6 +9,7 @@ import android.widget.TextView;
 
 import com.example.bryanty.projectx_smym5.domain.Expense;
 
+import java.text.DecimalFormat;
 import java.util.List;
 
 /**
@@ -59,7 +60,7 @@ public class ExpenseRowAdapter extends ArrayAdapter<Expense> {
 
         //expItemAvatar.setText(singleExp.get_expType().substring(0,1));
         expItemName.setText(singleExp.get_expType());
-        expItemAmount.setText("RM "+singleExp.get_expAmount());
+        expItemAmount.setText("RM "+String.format("%.2f",singleExp.get_expAmount()));
         expItemDate.setText(singleExp.get_expDate());
 
         return customView;

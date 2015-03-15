@@ -81,7 +81,7 @@ public class ExpenseFragment extends Fragment{
                 Fragment objFragment=new ExpenseDownFragment();
                 //pass value to another fragment
                 Bundle bundle = new Bundle();
-                bundle.putString("accountID",""+account.get(position).get_accID());
+                bundle.putInt("accountID",account.get(position).get_accID());
                 objFragment.setArguments(bundle);
                 //ready to replace next fragment
                 FragmentManager fragmentManager = getFragmentManager();
@@ -108,7 +108,7 @@ public class ExpenseFragment extends Fragment{
                 Fragment objFragment=new CreateExpenseFragment();
                 //pass value to another fragment
                 Bundle bundle = new Bundle();
-                bundle.putString("accountID",""+accountID);
+                bundle.putInt("accountID",accountID);
                 objFragment.setArguments(bundle);
                 //ready to replace next fragment
                 FragmentManager fragmentManager = getFragmentManager();

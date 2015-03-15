@@ -6,6 +6,7 @@ import android.database.Cursor;
 import android.database.SQLException;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
+import android.util.Log;
 
 import com.example.bryanty.projectx_smym5.domain.Account;
 import com.example.bryanty.projectx_smym5.domain.Expense;
@@ -117,6 +118,43 @@ public class DBHandler extends SQLiteOpenHelper{
         cursor.close();
         return records;
     }
+
+    public boolean updateAccount(Account account,int method){
+        boolean result=false;
+
+        ContentValues values = new ContentValues();
+        SQLiteDatabase db= getWritableDatabase();
+        Double amount=0.0;
+
+        if(method == 1){ //only update the amount
+            String query="SELECT "+COLUMN_ACC_AMOUNT+" FROM "+TABLE_NAME +" WHERE "+COLUMN_ACC_ID + "=\"" +account.get_accID() +"\";";
+            Cursor cursor = db.rawQuery(query, null);
+
+            if(cursor != null && cursor.moveToFirst()){
+                amount= cursor.getDouble(0);
+            }
+
+            cursor.close();
+
+            amount = amount - account.get_accAmount();
+            values.put(COLUMN_ACC_AMOUNT, amount);
+            result=true;
+        }
+        else if(method == 2){  //update account name,avatar and amount
+            values.put(COLUMN_ACC_NAME, account.get_accName());
+            values.put(COLUMN_ACC_COLOR, account.get_accColor());
+            values.put(COLUMN_ACC_AMOUNT, account.get_accAmount());
+            result=true;
+        }
+        else{
+            return result;
+        }
+
+        db.update(TABLE_NAME,values, COLUMN_ACC_ID+"=" + account.get_accID(),null);
+        db.close();
+
+        return result;
+    }
 //============================================================================================================================================================
     //add a new expense to database
     public void addExpense(Expense expense){
@@ -139,6 +177,36 @@ public class DBHandler extends SQLiteOpenHelper{
     //retrieve all expense from database
     public List<Expense> getAllExpense(){
         String query="SELECT * FROM "+TABLE_NAME2 +" WHERE 1";
+        SQLiteDatabase db= getWritableDatabase();
+
+        List<Expense> records = new ArrayList<Expense>();
+        //cursor point to your location
+        Cursor cursor = db.rawQuery(query, null);
+        //move to first row in your result
+        cursor.moveToFirst();
+
+        while(!cursor.isAfterLast()){
+            if(cursor.getString(cursor.getColumnIndex("expType")) != null){
+                Expense userRecord = new Expense();
+                userRecord.set_expID(cursor.getInt(0));
+                userRecord.set_expType(cursor.getString(1));
+                userRecord.set_expAmount(cursor.getDouble(2));
+                userRecord.set_expDate(cursor.getString(3));
+                userRecord.set_accID(cursor.getInt(4));
+
+                records.add(userRecord);
+                cursor.moveToNext();
+            }
+        }
+        cursor.close();
+        return records;
+    }
+
+    //retrieve all expense from one account
+    public List<Expense> getExpense(int accountID){
+       // String query="SELECT * FROM "+TABLE_NAME2 +" WHERE "+COLUMN_EXP_ACC_ID + "=\"" +accountID +"\";";
+        String query="SELECT * FROM "+TABLE_NAME2 +" WHERE "+COLUMN_EXP_ACC_ID + "=\"" +accountID +"\" ORDER BY substr(expDate, 7, 4) DESC,substr(expDate, 4, 2) DESC,substr(expDate, 1, 2) DESC;";
+
         SQLiteDatabase db= getWritableDatabase();
 
         List<Expense> records = new ArrayList<Expense>();

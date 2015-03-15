@@ -75,7 +75,7 @@ public class ExpenseAccountAdapter extends ArrayAdapter<Account>{
 
         accAvatar.setText(singleAcc.get_accName().substring(0,1));
         accName.setText(singleAcc.get_accName());
-        accAmount.setText("RM "+singleAcc.get_accAmount());
+        accAmount.setText("RM "+String.format("%.2f",singleAcc.get_accAmount()));
 
         accName.setTextColor(Color.WHITE);
         accAmount.setTextColor(Color.WHITE);

@@ -5,6 +5,11 @@ import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
+import android.text.Editable;
+import android.text.InputFilter;
+import android.text.Spanned;
+import android.text.TextWatcher;
+import android.text.method.DigitsKeyListener;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -16,6 +21,7 @@ import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.ImageButton;
+import android.widget.RadioGroup;
 import android.widget.Spinner;
 import android.widget.Toast;
 
@@ -44,9 +50,11 @@ public class CreateExpenseFragment extends Fragment {
     EditText expAmmount;
     EditText expTimes;
     String expType;
-    String accID;
+    Integer accID;
     String formatedDate;
     Date formatedDate_date;
+    RadioGroup radioGroupRepeat;
+    Integer dayAfter;
 
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
@@ -54,8 +62,11 @@ public class CreateExpenseFragment extends Fragment {
 
         //get value from previous fragment
         Bundle bundle = this.getArguments();
-        accID= bundle.getString("accountID");
-        Toast.makeText(getActivity(),"value pass from > "+accID,Toast.LENGTH_SHORT).show();
+        accID= bundle.getInt("accountID");;
+
+        expAmmount = (EditText)rootView.findViewById(R.id.editText_ExpAmmount);
+        expTimes = (EditText)rootView.findViewById(R.id.editText_times);
+        radioGroupRepeat= (RadioGroup)rootView.findViewById(R.id.radioGroup_repeat);
 
         //initial the spinner
         spinner= (Spinner)rootView.findViewById(R.id.spinner_expense_type);
@@ -108,7 +119,8 @@ public class CreateExpenseFragment extends Fragment {
                             Toast.LENGTH_LONG).show();
 
                     SimpleDateFormat sdf = new SimpleDateFormat("dd-MM-yyyy");
-                   formatedDate = String.valueOf(dayOfMonth)+"-"+ String.valueOf(monthOfYear+1)+"-"+ String.valueOf(year);
+                  // formatedDate = String.valueOf(dayOfMonth)+"-"+ String.valueOf(monthOfYear+1)+"-"+ String.valueOf(year);
+                    formatedDate = String.valueOf(year)+"-"+ String.valueOf(monthOfYear+1)+"-"+String.valueOf(dayOfMonth);
 
                     try {
                         formatedDate_date= sdf.parse(formatedDate);
@@ -121,32 +133,72 @@ public class CreateExpenseFragment extends Fragment {
             };
         });
 
+        //initial radio group listener
+        radioGroupRepeat.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
+
+            @Override
+            public void onCheckedChanged(RadioGroup group, int checkedId) {
+                Log.d("chk", "id" + checkedId);
+
+                if (checkedId == R.id.radioButton_weekly) {
+                    //min 1, max 52 because 1 year only 52 weeks
+                    expTimes.setFilters(new InputFilter[]{ new InputFilterMinMax("1", "52")});
+                    dayAfter=7;
+                } else if (checkedId ==R.id.radioButton_monthly) {
+                    //min 1, max 12 because 1 year only 12 months
+                    expTimes.setFilters(new InputFilter[]{ new InputFilterMinMax("1", "12")});
+                    dayAfter=30;
+                }
+                else{
+                    dayAfter=0;
+                }
+
+
+            }
+
+        });
+
         btnAdd=(ImageButton) rootView.findViewById(R.id.imageButtonAddExp);
         btnAdd.setOnClickListener(new View.OnClickListener()
         {
             @Override
             public void onClick(View v)
             {
-                expAmmount = (EditText)rootView.findViewById(R.id.editText_ExpAmmount);
-                expTimes = (EditText)rootView.findViewById(R.id.editText_times);
                 dbHandler= new DBHandler(getActivity(),null,null,1);
 
-                String hawaii= expType+Double.parseDouble(expAmmount.getText().toString())+">>>"+formatedDate+"<<<<<"+accID;
+                Expense expense=new Expense(expType,Double.parseDouble(expAmmount.getText().toString()),formatedDate,accID);
 
-                Expense expense=new Expense(expType,Double.parseDouble(expAmmount.getText().toString()),formatedDate,Integer.parseInt(accID));
+                int repeat = Integer.parseInt(expTimes.getText().toString());
+                Log.v("MyActivity", "repeat=" + repeat); //print message to console
 
-                Log.v("MyActivity", "====>" +hawaii ); //print message to console
-                Log.v("MyActivity", "====!!!!!!!!!!!!!!!!>" +formatedDate_date ); //print message to console
+//                ///////////////
+//                //add more date
+//                String dt = "2012-01-31";  // Start date
+//                SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+//                Calendar c = Calendar.getInstance();
+//                try {
+//                    c.setTime(sdf.parse(dt));
+//                } catch (ParseException e) {
+//                    e.printStackTrace();
+//                }
+//                c.add(Calendar.DATE, 7);  // number of days to add, can also use Calendar.DAY_OF_MONTH in place of Calendar.DATE
+//                String output = sdf.format(c.getTime());
+//                Log.v("MyActivity", "day add=" + output); //print message to console
 
-                Log.v("MyActivity", "type>" +expense.get_expType() ); //print message to console
-                Log.v("MyActivity", "amount>" +expense.get_expAmount() ); //print message to console
-                Log.v("MyActivity", "date>" +expense.get_expDate() ); //print message to console
-                Log.v("MyActivity", "id>" +expense.get_accID() ); //print message to console
+                formatedDate= addMoreDay(formatedDate,dayAfter);
 
-                Toast.makeText(getActivity(),"item selected > "+hawaii,Toast.LENGTH_SHORT).show();
-               dbHandler.addExpense(expense);
+                dbHandler.addExpense(expense);
 
-                Toast.makeText(getActivity(), "Successful create expense" , Toast.LENGTH_LONG).show();
+                //update account amount
+                boolean result = false;
+                Account account = new Account();
+                account.set_accID(accID);
+                account.set_accAmount(Double.parseDouble(expAmmount.getText().toString()));
+                result = dbHandler.updateAccount(account,1);
+
+                if(result == true){
+                    Toast.makeText(getActivity(), "Successful create expense" , Toast.LENGTH_LONG).show();
+                }
 
 //                //back to account fragment
 //                Fragment objFragment=new ExpenseFragment();
@@ -163,4 +215,20 @@ public class CreateExpenseFragment extends Fragment {
 
         return rootView;
     }
+
+    public String addMoreDay(String startDate,int days){
+       // String startDate = "2012-01-04";  // Start date
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+        Calendar c = Calendar.getInstance();
+        try {
+            c.setTime(sdf.parse(startDate));
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+        c.add(Calendar.DATE, days);  // number of days to add, can also use Calendar.DAY_OF_MONTH in place of Calendar.DATE
+        String output = sdf.format(c.getTime());
+
+        return output;
+    }
+
 }

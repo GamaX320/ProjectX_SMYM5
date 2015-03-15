@@ -24,13 +24,20 @@ public class ExpenseDownFragment extends Fragment {
     View rootView;
     DBHandler dbHandler;
 
+    Integer accID;
+
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         rootView=inflater.inflate(R.layout.fragment_expense_down,container,false);
 
+        //get value from previous fragment
+        Bundle bundle = this.getArguments();
+        accID= bundle.getInt("accountID");;
+
         //load all account from database
         dbHandler= new DBHandler(getActivity(),null,null,1);
-        final List<Expense> expense = dbHandler.getAllExpense();
+        //final List<Expense> expense = dbHandler.getAllExpense();
+        final List<Expense> expense = dbHandler.getExpense(accID);
 
         //custom adapter
         ListAdapter expenseAdapter=new ExpenseRowAdapter(getActivity().getApplicationContext(), expense);
@@ -48,10 +55,10 @@ public class ExpenseDownFragment extends Fragment {
             }
         });
 
-        //get value from previous fragment
-        Bundle bundle = this.getArguments();
-        String test1= bundle.getString("accountID");
-        Toast.makeText(getActivity(),"value pass from > "+test1,Toast.LENGTH_SHORT).show();
+//        //get value from previous fragment
+//        Bundle bundle = this.getArguments();
+//        String test1= bundle.getString("accountID");
+//        Toast.makeText(getActivity(),"value pass from > "+test1,Toast.LENGTH_SHORT).show();
 
         return rootView;
     }
