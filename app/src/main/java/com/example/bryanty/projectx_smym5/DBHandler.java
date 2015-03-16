@@ -257,4 +257,56 @@ public class DBHandler extends SQLiteOpenHelper{
         return records;
     }
 
+    //get one expense from particular account and expesne id
+    public Expense getExpenseByID(int accountID,int expenseid){
+        Expense userRecord = new Expense();
+        String query="SELECT * FROM "+TABLE_NAME2 +" WHERE "+COLUMN_EXP_ACC_ID + "=\"" +accountID +"\" AND "+COLUMN_EXP_ID+ "=\"" +expenseid +"\";";
+
+        SQLiteDatabase db= getWritableDatabase();
+        //cursor point to your location
+        Cursor cursor = db.rawQuery(query, null);
+        //move to first row in your result
+        cursor.moveToFirst();
+
+        while(!cursor.isAfterLast()){
+            if(cursor.getString(cursor.getColumnIndex("expType")) != null){
+                userRecord.set_expID(cursor.getInt(0));
+                userRecord.set_expType(cursor.getString(1));
+                userRecord.set_expAmount(cursor.getDouble(2));
+                userRecord.set_expDate(cursor.getString(3));
+                userRecord.set_accID(cursor.getInt(4));
+
+                cursor.moveToNext();
+            }
+        }
+        cursor.close();
+
+        return userRecord;
+    }
+
+    //update expense
+    public boolean updateExpense(Expense expense){
+        boolean result=false;
+
+        ContentValues values = new ContentValues();
+        SQLiteDatabase db= getWritableDatabase();
+
+        try{
+            values.put(COLUMN_EXP_TYPE, expense.get_expType());
+            values.put(COLUMN_EXP_AMOUNT, expense.get_expAmount());
+            values.put(COLUMN_EXP_DATE, expense.get_expDate());
+
+            result=true;
+        }catch(SQLException e){
+            return result;
+        }
+
+        //db.update(TABLE_NAME2,values, COLUMN_EXP_ACC_ID+"=" + expense.get_accID(),null);
+        db.update(TABLE_NAME2,values, COLUMN_EXP_ACC_ID+"=" + expense.get_accID()+" AND "+COLUMN_EXP_ID+"=" +expense.get_expID(),null);
+        db.close();
+
+
+        return result;
+    }
+
 }

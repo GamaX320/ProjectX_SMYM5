@@ -56,7 +56,7 @@ public class MainActivity extends ActionBarActivity implements NavigationDrawerC
                 objFragment=new TestFragment();
                 break;
             case 4:
-                objFragment=new ExpenseTopFragment();
+                //objFragment=new ExpenseTopFragment();
                 break;
         }
         // update the main content by replacing fragments

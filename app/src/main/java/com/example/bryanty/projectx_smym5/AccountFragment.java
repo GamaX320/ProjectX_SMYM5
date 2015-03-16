@@ -87,6 +87,17 @@ public class AccountFragment extends Fragment {
             }
         });
 
+      //long press list view for delete selected item
+        accountListView.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener() {
+            @Override
+            public boolean onItemLongClick(AdapterView<?> arg0, View arg1, int arg2, long arg3) {
+
+                //arg1.findViewById(R.id.imgdelete).setVisibility(View.VISIBLE);
+
+                return false;
+            }
+        });
+
         return rootView;
     }
 }

@@ -3,6 +3,7 @@ package com.example.bryanty.projectx_smym5;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentManager;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -49,8 +50,20 @@ public class ExpenseDownFragment extends Fragment {
             @Override
             public void onItemClick(AdapterView<?> arg0, View arg1, int position, long arg3) {
                 // TODO Auto-generated method stub
-
                 Log.v("MyActivity", "exp=" + expense.get(position).get_expID()); //print message to console
+
+                Fragment objFragment=new UpdateExpenseFragment();
+                //pass value to another fragment
+                Bundle bundle = new Bundle();
+                bundle.putInt("accountID",accID);
+                bundle.putInt("expenseID",expense.get(position).get_expID());
+                objFragment.setArguments(bundle);
+                //ready to replace next fragment
+                FragmentManager fragmentManager = getFragmentManager();
+                fragmentManager.beginTransaction()
+                        .replace(R.id.container,objFragment)
+                        .addToBackStack(null)
+                        .commit();
 
             }
         });

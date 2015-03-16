@@ -20,22 +20,6 @@
             android:name=".TestActivity"
             android:label="@string/title_activity_test" >
         </activity>
-        <activity
-            android:name=".CreateAccount"
-            android:label="@string/title_activity_create_account"
-            android:parentActivityName=".MainActivity" >
-            <meta-data
-                android:name="android.support.PARENT_ACTIVITY"
-                android:value="com.example.bryanty.projectx_smym5.MainActivity" />
-        </activity>
-        <activity
-            android:name=".CreateExpense"
-            android:label="@string/title_activity_create_expense"
-            android:parentActivityName=".MainActivity" >
-            <meta-data
-                android:name="android.support.PARENT_ACTIVITY"
-                android:value="com.example.bryanty.projectx_smym5.MainActivity" />
-        </activity>
     </application>
 
 </manifest>
