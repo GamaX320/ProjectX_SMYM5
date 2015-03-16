@@ -87,9 +87,9 @@ public class DBHandler extends SQLiteOpenHelper{
     }
 
     //delete a account from database
-    public void deleteAccount(String accountName){
+    public void deleteAccount(int accountID){
         SQLiteDatabase db= getWritableDatabase();
-        db.execSQL("DELETE FROM  "+TABLE_NAME +" WHERE "+COLUMN_ACC_NAME + "=\"" +accountName +"\";");
+        db.execSQL("DELETE FROM  "+TABLE_NAME +" WHERE "+COLUMN_ACC_ID + "=\"" +accountID +"\";");
     }
 
     //retrieve all account from database

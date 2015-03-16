@@ -1,5 +1,7 @@
 package com.example.bryanty.projectx_smym5;
 
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
@@ -25,6 +27,8 @@ import java.util.List;
 public class AccountFragment extends Fragment {
     View rootView;
     DBHandler dbHandler;
+
+    Integer tempPosition;
 
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
@@ -90,10 +94,41 @@ public class AccountFragment extends Fragment {
       //long press list view for delete selected item
         accountListView.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener() {
             @Override
-            public boolean onItemLongClick(AdapterView<?> arg0, View arg1, int arg2, long arg3) {
+            public boolean onItemLongClick(AdapterView<?> arg0, View arg1, int position, long arg3) {
+                AlertDialog.Builder alert = new AlertDialog.Builder(getActivity());
+                alert.setTitle("Alert!!");
+                alert.setMessage("Are you sure to delete record " + account.get(position).get_accName());
+                tempPosition=position;
 
-                //arg1.findViewById(R.id.imgdelete).setVisibility(View.VISIBLE);
+                alert.setPositiveButton("YES", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        //do your work here
+                        //load all account from database
+                        dbHandler= new DBHandler(getActivity(),null,null,1);
+                        dbHandler.deleteAccount(account.get(tempPosition).get_accID());
 
+                        //refresh list view
+                        //load all account from database
+                        dbHandler= new DBHandler(getActivity(),null,null,1);
+                        final List<Account> account = dbHandler.getAllAccount();
+                        //custom adapter
+                        ListAdapter accountAdapter=new AccountRowAdapter(getActivity().getApplicationContext(), account);
+                        ListView accountListView=(ListView)rootView.findViewById(R.id.listView_account);
+                        accountListView.setAdapter(accountAdapter);
+
+                        dialog.dismiss();
+
+                    }
+                });
+                alert.setNegativeButton("NO", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        dialog.dismiss();
+                    }
+                });
+
+                alert.show();
                 return false;
             }
         });
