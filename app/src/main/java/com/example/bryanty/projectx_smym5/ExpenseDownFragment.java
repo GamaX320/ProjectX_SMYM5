@@ -76,7 +76,7 @@ public class ExpenseDownFragment extends Fragment {
             @Override
             public boolean onItemLongClick(AdapterView<?> arg0, View arg1, int position, long arg3) {
                 AlertDialog.Builder alert = new AlertDialog.Builder(getActivity());
-                alert.setTitle("Alert!!");
+                alert.setTitle("Delete Expense");
                 alert.setMessage("Are you sure to delete record ");
                 tempPosition=position;
 
@@ -99,7 +99,7 @@ public class ExpenseDownFragment extends Fragment {
                         expenseListView.setAdapter(expenseAdapter);
 
                         dialog.dismiss();
-                        
+
                         Toast.makeText( getActivity(),"Delete successful",Toast.LENGTH_SHORT).show();
 
                     }

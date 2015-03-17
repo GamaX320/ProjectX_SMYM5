@@ -3,6 +3,7 @@ package com.example.bryanty.projectx_smym5;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
@@ -43,7 +44,7 @@ public class AccountFragment extends Fragment {
 
         //custom adapter
         ListAdapter accountAdapter=new AccountRowAdapter(getActivity().getApplicationContext(), account);
-        ListView accountListView=(ListView)rootView.findViewById(R.id.listView_account);
+    final    ListView accountListView=(ListView)rootView.findViewById(R.id.listView_account);
         accountListView.setAdapter(accountAdapter);
 
         //listview listener
@@ -96,7 +97,7 @@ public class AccountFragment extends Fragment {
             @Override
             public boolean onItemLongClick(AdapterView<?> arg0, View arg1, int position, long arg3) {
                 AlertDialog.Builder alert = new AlertDialog.Builder(getActivity());
-                alert.setTitle("Alert!!");
+                alert.setTitle("Delete Account");
                 alert.setMessage("Are you sure to delete record " + account.get(position).get_accName());
                 tempPosition=position;
 
@@ -129,6 +130,7 @@ public class AccountFragment extends Fragment {
                 });
 
                 alert.show();
+
                 return false;
             }
         });
