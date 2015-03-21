@@ -135,11 +135,19 @@ public class NavigationDrawerFragment extends Fragment implements NavigationDraw
 
     public List<NavigationItem> getMenu() {
         List<NavigationItem> items = new ArrayList<NavigationItem>();
-        items.add(new NavigationItem("Account", getResources().getDrawable(R.drawable.ic_account_black)));
-        items.add(new NavigationItem("Expenses", getResources().getDrawable(R.drawable.ic_expense_black)));
-        items.add(new NavigationItem("History", getResources().getDrawable(R.drawable.ic_history_black)));
-        items.add(new NavigationItem("Report", getResources().getDrawable(R.drawable.ic_report_black)));
-        items.add(new NavigationItem("To-do List", getResources().getDrawable(R.drawable.ic_list_black)));
+        //black icon
+//        items.add(new NavigationItem("Account", getResources().getDrawable(R.drawable.ic_account_black)));
+//        items.add(new NavigationItem("Expenses", getResources().getDrawable(R.drawable.ic_expense_black)));
+//        items.add(new NavigationItem("History", getResources().getDrawable(R.drawable.ic_history_black)));
+//        items.add(new NavigationItem("Report", getResources().getDrawable(R.drawable.ic_report_black)));
+//        items.add(new NavigationItem("To-do List", getResources().getDrawable(R.drawable.ic_list_black)));
+
+        //grey icon
+        items.add(new NavigationItem("Account", getResources().getDrawable(R.drawable.ic_account)));
+        items.add(new NavigationItem("Expenses", getResources().getDrawable(R.drawable.ic_expense)));
+        items.add(new NavigationItem("History", getResources().getDrawable(R.drawable.ic_history)));
+        items.add(new NavigationItem("Report", getResources().getDrawable(R.drawable.ic_report)));
+
         return items;
     }
 

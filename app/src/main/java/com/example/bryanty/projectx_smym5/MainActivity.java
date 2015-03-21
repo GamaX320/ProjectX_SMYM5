@@ -78,6 +78,10 @@ public class MainActivity extends ActionBarActivity implements NavigationDrawerC
 //                intent.setClass(this,SetPreferenceActivity.class);
                 startActivity(intent);
             break;
+
+            case R.id.action_aboutus:
+                getSupportFragmentManager().beginTransaction().replace(R.id.container,new AboutUsFragment()).commit();
+            break;
         }
 
         return super.onOptionsItemSelected(item);
