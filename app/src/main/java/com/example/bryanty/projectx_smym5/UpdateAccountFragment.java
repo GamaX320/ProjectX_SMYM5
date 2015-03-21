@@ -60,8 +60,8 @@ public class UpdateAccountFragment extends Fragment  implements OnClickListener 
         Account account = new Account();
         dbHandler= new DBHandler(getActivity(),null,null,1);
         account= dbHandler.getAccount(accID);
-        Log.v("MyActivity", "1=" + accID); //print message to console
-        Log.v("MyActivity", "asdasdasd=" + account.get_accName()); //print message to console
+//        Log.v("MyActivity", "1=" + accID); //print message to console
+//        Log.v("MyActivity", "asdasdasd=" + account.get_accName()); //print message to console
         //load account information
         accName.setText(account.get_accName());
         accAmount.setText(""+account.get_accAmount());
@@ -123,6 +123,10 @@ public class UpdateAccountFragment extends Fragment  implements OnClickListener 
         btnAvatar5.setOnClickListener(this);
         btnAvatar6.setOnClickListener(this);
         btnAvatar7.setOnClickListener(this);
+
+        //load avatar from database
+        Log.v("MyActivity", "avatar number=" + account.get_accColor()); //print message to console
+        loadAvatar(account.get_accColor());
 
         btnCancel=(ImageButton) rootView.findViewById(R.id.imageButtonCancelAcc);
         btnCancel.setOnClickListener(new View.OnClickListener() {
@@ -188,5 +192,32 @@ public class UpdateAccountFragment extends Fragment  implements OnClickListener 
         }
 
         Log.v("MyActivity", "selected=" + selectedAvatar); //print message to console
+    }
+
+    public void loadAvatar(int selectedAvatar){
+        switch(selectedAvatar){
+            case 1:
+                btnAvatar1.setBackgroundColor(Color.GRAY);
+                break;
+            case 2:
+                btnAvatar2.setBackgroundColor(Color.GRAY);
+                break;
+            case 3:
+                btnAvatar3.setBackgroundColor(Color.GRAY);
+                break;
+            case 4:
+                btnAvatar4.setBackgroundColor(Color.GRAY);
+                break;
+            case 5:
+                btnAvatar5.setBackgroundColor(Color.GRAY);
+                break;
+            case 6:
+                btnAvatar6.setBackgroundColor(Color.GRAY);
+                break;
+            case 7:
+                btnAvatar7.setBackgroundColor(Color.GRAY);
+                break;
+
+        }
     }
 }

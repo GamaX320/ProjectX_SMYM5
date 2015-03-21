@@ -1,15 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
 <PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android">
-    <EditTextPreference
-        android:key="name"
-        android:summary="Set your name here"
-        android:title="Name" />
-    <CheckBoxPreference
-        android:key="en"
-        android:summary="Select English"
-        android:title="English" />
 
-    <Preference android:title="Acts like a button"
-        android:key="button"
-        android:summary="This will act like a button"/>
+    <Preference
+        android:title="Theme"
+        android:key="color"
+        android:summary="Select theme color"/>
+
+    <Preference
+        android:title="About us"
+        android:key="color"
+        android:summary="@string/app_name"/>
 </PreferenceScreen>
