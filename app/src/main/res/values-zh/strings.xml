@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="app_name">Show Me Your Money2</string>
+    <string name="title_section1">部分 1</string>
+    <string name="title_section2">部分 2</string>
+    <string name="title_section3">部分 3</string>
+    <string name="navigation_drawer_open">打开导航抽屉</string>
+    <string name="navigation_drawer_close">关闭导航抽屉r</string>
+    <string name="action_example">例如行动</string>
+    <string name="action_settings">设置</string>
+    <string name="title_activity_test">TestActivity</string>
+    <string name="hello_world">Hello world!</string>
+
+    <!-- custom string -->
+    <string name="title_app">Show Me Your Money</string>
+    <string name="drawer_open">菜单打开</string>
+    <string name="drawer_close">菜单关闭</string>
+    <string name="about_us">关于我们</string>
+    <string name="title_account">帐户</string>
+    <string name="title_expense">费用</string>
+    <string name="title_activity_create_account">创建账户</string>
+    <string name="title_create_account">创建账户</string>
+    <string name="title_activity_create_expense">创建费用</string>
+    <string name="title_create_expense">创建费用</string>
+    <string name="title_create_expense_once">一旦</string>
+    <string name="title_create_expense_daily">日报</string>
+    <string name="title_create_expense_monthly">每月一次</string>
+    <string name="title_create_expense_weekly">周报</string>
+
+    <string-array name="type_array">
+        <item>食品</item>
+        <item>运输</item>
+        <item>娱乐</item>
+        <item>交流</item>
+        <item>家用</item>
+        <item>其他</item>
+    </string-array>
+
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="title_activity_test_activity2">TestActivity2</string>
+    <string name="title_activity_set_preference">SetPreferenceActivity</string>
+    <string name="text_color_dark_blue">蓝色 (Default)</string>
+    <string name="text_color_pink">蓝色</string>
+    <string name="text_color_purple">紫色</string>
+    <string name="text_color_light_blue">浅蓝色</string>
+    <string name="text_color_green">绿色</string>
+    <string name="text_color_orange">橙色</string>
+    <string name="text_color_dark">黑色</string>
+    <string name="title_activity_settings">设置</string>
+    <string name="title_select_color">选择主题颜色</string>
+
+    ///
+    <string name="title_activity_pie_chart">报告</string>
+    <string name="TitleOverview">概观</string>
+    <string name="reportFood">食品</string>
+    <string name="reportTransport">运输</string>
+    <string name="reportEntertainment">娱乐</string>
+    <string name="reportCommunication">交流</string>
+    <string name="reportHousing">家用</string>
+    <string name="reportOther">其他</string>
+    <string name="percentFood" />
+    <string name="percentTransport" />
+    <string name="percentEntertainment" />
+    <string name="percentCommunication" />
+    <string name="percentHousing" />
+    <string name="percentOther" />
+    <string name="reportFood2" />
+    <string name="reportTranspoort2" />
+    <string name="reportEntertainment2" />
+    <string name="reportCommunication2" />
+    <string name="reportHousing2" />
+    <string name="reportOther2" />
+    <string name="title_ViewSub">视图 :</string>
+    <string name="displayDate" />
+    <string name="displayDateRange">日期 :</string>
+
+
+    <string-array name="Type_report_view">
+        <item>今日</item>
+        <item>本星期</item>
+        <item>本月</item>
+    </string-array>
+
+
+</resources>

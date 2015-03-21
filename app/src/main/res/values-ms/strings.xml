@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="app_name">Show Me Your Money2</string>
+    <string name="title_section1">Seksyen 1</string>
+    <string name="title_section2">Seksyen 2</string>
+    <string name="title_section3">Seksyen 3</string>
+    <string name="navigation_drawer_open">Buka laci navigasi</string>
+    <string name="navigation_drawer_close">Tutup laci navigasi</string>
+    <string name="action_example">Tindakan contoh</string>
+    <string name="action_settings">Tetapan</string>
+    <string name="title_activity_test">TestActivity</string>
+    <string name="hello_world">Hello world!</string>
+
+    <!-- custom string -->
+    <string name="title_app">Show Me Your Money</string>
+    <string name="drawer_open">Menu dibuka</string>
+    <string name="drawer_close">Menu ditutup</string>
+    <string name="about_us">Mengenai Kami</string>
+    <string name="title_account">Akaun</string>
+    <string name="title_expense">Perbelanjaan</string>
+    <string name="title_activity_create_account">BuatAkaun</string>
+    <string name="title_create_account">Buat Akaun</string>
+    <string name="title_activity_create_expense">BuatPerbelanjaan</string>
+    <string name="title_create_expense">Buat Perbelanjaan</string>
+    <string name="title_create_expense_once">Sekali</string>
+    <string name="title_create_expense_daily">Harian</string>
+    <string name="title_create_expense_monthly">Bulanan</string>
+    <string name="title_create_expense_weekly">Mingguan</string>
+
+    <string-array name="type_array">
+        <item>Makanan</item>
+        <item>Pengangkutan</item>
+        <item>Hiburan</item>
+        <item>Komunikasi</item>
+        <item>Perumahan</item>
+        <item>Lain</item>
+    </string-array>
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="title_activity_test_activity2">TestActivity2</string>
+    <string name="title_activity_set_preference">SetPreferenceActivity</string>
+    <string name="text_color_dark_blue">Biru (Lalai)</string>
+    <string name="text_color_pink">Merah Samar</string>
+    <string name="text_color_purple">Ungu</string>
+    <string name="text_color_light_blue">Biru Cetek</string>
+    <string name="text_color_green">Hijau</string>
+    <string name="text_color_orange">Orange</string>
+    <string name="text_color_dark">Hitam</string>
+    <string name="title_activity_settings">Tetapan</string>
+    <string name="title_select_color">Pilih warna tema</string>
+
+    ///
+    <string name="title_activity_pie_chart">Laporan</string>
+    <string name="TitleOverview">Gambaran Keseluruhan</string>
+    <string name="reportFood">Makanan</string>
+    <string name="reportTransport">Pengangkutan</string>
+    <string name="reportEntertainment">Hiburan</string>
+    <string name="reportCommunication">Komunikasi</string>
+    <string name="reportHousing">Perumahan</string>
+    <string name="reportOther">Lain</string>
+    <string name="percentFood" />
+    <string name="percentTransport" />
+    <string name="percentEntertainment" />
+    <string name="percentCommunication" />
+    <string name="percentHousing" />
+    <string name="percentOther" />
+    <string name="reportFood2" />
+    <string name="reportTranspoort2" />
+    <string name="reportEntertainment2" />
+    <string name="reportCommunication2" />
+    <string name="reportHousing2" />
+    <string name="reportOther2" />
+    <string name="title_ViewSub">Lihat :</string>
+    <string name="displayDate" />
+    <string name="displayDateRange">Tarikh :</string>
+
+    <string-array name="Type_report_view">
+        <item>Hari ini</item>
+        <item>Minggu ini</item>
+        <item>Bulan ini</item>
+    </string-array>
+
+
+</resources>
