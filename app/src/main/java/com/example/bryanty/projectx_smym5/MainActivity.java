@@ -1,13 +1,16 @@
 package com.example.bryanty.projectx_smym5;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.graphics.Color;
 import android.os.Bundle;
+import android.preference.PreferenceManager;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarActivity;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.Toast;
@@ -72,6 +75,7 @@ public class MainActivity extends ActionBarActivity implements NavigationDrawerC
 
                 Intent intent = new Intent();
                 intent.setClass(this,SettingsActivity.class);
+//                intent.setClass(this,SetPreferenceActivity.class);
                 startActivity(intent);
             break;
         }
@@ -148,4 +152,17 @@ public class MainActivity extends ActionBarActivity implements NavigationDrawerC
         }
         return colorString;
     }
+
+//    @Override
+//    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+//        loadPref();
+//    }
+//
+//    private void loadPref() {
+//        SharedPreferences mySharedPreferences = PreferenceManager.getDefaultSharedPreferences(this);
+//
+//        int my_color_preference= mySharedPreferences.getInt("color_prefs",0);
+//
+//        Log.v("MyActivity","you color selected >>> "+my_color_preference);
+//    }
 }
