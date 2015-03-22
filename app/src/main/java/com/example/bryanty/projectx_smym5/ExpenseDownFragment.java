@@ -17,7 +17,10 @@ import android.widget.Toast;
 
 import com.example.bryanty.projectx_smym5.domain.Account;
 import com.example.bryanty.projectx_smym5.domain.Expense;
+import com.example.bryanty.projectx_smym5.domain.History;
 
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
 import java.util.List;
 
 /**
@@ -97,6 +100,15 @@ public class ExpenseDownFragment extends Fragment {
                         ListAdapter expenseAdapter=new ExpenseRowAdapter(getActivity().getApplicationContext(), expense);
                         ListView expenseListView=(ListView)rootView.findViewById(R.id.listView_expense_item);
                         expenseListView.setAdapter(expenseAdapter);
+
+                        //add new history
+                        //default get today date
+                        Calendar c = Calendar.getInstance();
+                        String todayDate="";
+                        SimpleDateFormat df = new SimpleDateFormat("yyyy-M-dd");
+                        todayDate = df.format(c.getTime());
+                        History history=new History("Delete expense ",todayDate);
+                        dbHandler.addHistory(history);
 
                         dialog.dismiss();
 

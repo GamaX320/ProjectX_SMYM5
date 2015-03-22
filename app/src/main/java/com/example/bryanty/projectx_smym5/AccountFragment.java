@@ -19,7 +19,10 @@ import android.widget.ListView;
 import android.widget.Toast;
 
 import com.example.bryanty.projectx_smym5.domain.Account;
+import com.example.bryanty.projectx_smym5.domain.History;
 
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
 import java.util.List;
 
 /**
@@ -118,7 +121,19 @@ public class AccountFragment extends Fragment {
                         ListView accountListView=(ListView)rootView.findViewById(R.id.listView_account);
                         accountListView.setAdapter(accountAdapter);
 
+
+                        //add new history
+                        //default get today date
+                        Calendar c = Calendar.getInstance();
+                        String todayDate="";
+                        SimpleDateFormat df = new SimpleDateFormat("yyyy-M-dd");
+                        todayDate = df.format(c.getTime());
+                        History history=new History("Delete account ",todayDate);
+                        dbHandler.addHistory(history);
+
                         dialog.dismiss();
+
+                        Toast.makeText( getActivity(),"Delete successful",Toast.LENGTH_SHORT).show();
 
                     }
                 });
