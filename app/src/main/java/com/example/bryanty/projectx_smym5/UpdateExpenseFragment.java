@@ -26,6 +26,7 @@ import android.widget.Toast;
 
 import com.example.bryanty.projectx_smym5.domain.Account;
 import com.example.bryanty.projectx_smym5.domain.Expense;
+import com.example.bryanty.projectx_smym5.domain.History;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -243,6 +244,15 @@ public class UpdateExpenseFragment extends Fragment {
                     if(result == true){
                         Toast.makeText(getActivity(), "Successful create expense" , Toast.LENGTH_LONG).show();
                     }
+
+                    //add new history
+                    //default get today date
+                    Calendar c = Calendar.getInstance();
+                    String todayDate="";
+                    SimpleDateFormat df = new SimpleDateFormat("yyyy-M-dd");
+                    todayDate = df.format(c.getTime());
+                    History history=new History("Update expense "+expType,todayDate);
+                    dbHandler.addHistory(history);
 
                     //back to expense fragment
                     Fragment objFragment=new ExpenseFragment();

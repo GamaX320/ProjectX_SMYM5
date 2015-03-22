@@ -14,11 +14,15 @@ import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.Toast;
 
+import com.example.bryanty.projectx_smym5.domain.History;
+
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
 
 public class SettingsActivity extends ActionBarActivity implements View.OnClickListener,NavigationDrawerCallbacks {
     private Toolbar mToolbar;
@@ -143,6 +147,17 @@ public class SettingsActivity extends ActionBarActivity implements View.OnClickL
             fos.write(selectedColor.toString().getBytes());
             fos.close();
             Toast.makeText(this, "Settings Saved, required restart application to take effect", Toast.LENGTH_LONG).show();
+
+            //add new history
+            //default get today date
+            DBHandler dbHandler;
+            dbHandler= new DBHandler(this,null,null,1);
+            Calendar c = Calendar.getInstance();
+            String todayDate="";
+            SimpleDateFormat df = new SimpleDateFormat("yyyy-M-dd");
+            todayDate = df.format(c.getTime());
+            History history=new History("Change theme color ",todayDate);
+            dbHandler.addHistory(history);
 
         } catch (Exception e) {
             Toast.makeText(this, "Unable save settings", Toast.LENGTH_LONG).show();

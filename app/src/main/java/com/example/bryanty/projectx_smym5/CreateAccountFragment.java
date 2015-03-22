@@ -17,7 +17,10 @@ import android.widget.Toast;
 import android.view.View.OnClickListener;
 
 import com.example.bryanty.projectx_smym5.domain.Account;
+import com.example.bryanty.projectx_smym5.domain.History;
 
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
 import java.util.List;
 
 /**
@@ -71,7 +74,16 @@ public class CreateAccountFragment extends Fragment implements OnClickListener {
                     dbHandler.addAccount(account);
                     Log.v("MyActivity", "index=" + Double.parseDouble(accAmount.getText().toString())); //print message to console
                     Toast.makeText(getActivity(), "Successful create account", Toast.LENGTH_LONG).show();
-                    printDatabase();
+                    //printDatabase();
+
+                    //add new history
+                    //default get today date
+                    Calendar c = Calendar.getInstance();
+                    String todayDate="";
+                    SimpleDateFormat df = new SimpleDateFormat("yyyy-M-dd");
+                    todayDate = df.format(c.getTime());
+                    History history=new History("Add new account "+accName.getText().toString(),todayDate);
+                    dbHandler.addHistory(history);
 
                     //back to account fragment
                     Fragment objFragment = new AccountFragment();

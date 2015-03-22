@@ -17,7 +17,10 @@ import android.widget.Toast;
 import android.view.View.OnClickListener;
 
 import com.example.bryanty.projectx_smym5.domain.Account;
+import com.example.bryanty.projectx_smym5.domain.History;
 
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
 import java.util.List;
 
 /**
@@ -95,6 +98,15 @@ public class UpdateAccountFragment extends Fragment  implements OnClickListener 
                     if(result == true){
                         Toast.makeText(getActivity(), "Successful update account", Toast.LENGTH_LONG).show();
                     }
+
+                    //add new history
+                    //default get today date
+                    Calendar c = Calendar.getInstance();
+                    String todayDate="";
+                    SimpleDateFormat df = new SimpleDateFormat("yyyy-M-dd");
+                    todayDate = df.format(c.getTime());
+                    History history=new History("Update account "+accName.getText().toString(),todayDate);
+                    dbHandler.addHistory(history);
 
                     //back to account fragment
                     Fragment objFragment = new AccountFragment();

@@ -10,6 +10,7 @@ import android.util.Log;
 
 import com.example.bryanty.projectx_smym5.domain.Account;
 import com.example.bryanty.projectx_smym5.domain.Expense;
+import com.example.bryanty.projectx_smym5.domain.History;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -22,6 +23,7 @@ public class DBHandler extends SQLiteOpenHelper{
     public static final String DATABASE_NAME = "financial.db";
     public static final String TABLE_NAME ="accounts";
     public static final String TABLE_NAME2 ="expense";
+    public static final String TABLE_NAME3 ="history";
 
     //column for table account
     public static final String COLUMN_ACC_ID ="accID";
@@ -35,6 +37,11 @@ public class DBHandler extends SQLiteOpenHelper{
     public static final String COLUMN_EXP_AMOUNT ="expAmount";
     public static final String COLUMN_EXP_DATE ="expDate";
     public static final String COLUMN_EXP_ACC_ID ="accID";
+
+    //column for table history
+    public static final String COLUMN_HIS_ID ="hisID";
+    public static final String COLUMN_HIS_TYPE ="hisType";
+    public static final String COLUMN_HIS_DATE ="hisDate";
 
     public DBHandler(Context context, String name, SQLiteDatabase.CursorFactory factory, int version) {
         super(context, DATABASE_NAME, factory, DATABASE_VERSION);
@@ -60,17 +67,26 @@ public class DBHandler extends SQLiteOpenHelper{
                 COLUMN_EXP_DATE + " TEXT," +
                 COLUMN_EXP_ACC_ID + " INTEGER, FOREIGN KEY ("+COLUMN_EXP_ACC_ID +") REFERENCES "+TABLE_NAME +" ("+COLUMN_ACC_ID +"));";
 
+        //query for create table history
+        String query3= "CREATE TABLE " + TABLE_NAME3 + "(" +
+                COLUMN_HIS_ID + " INTEGER PRIMARY KEY AUTOINCREMENT," +
+                COLUMN_HIS_TYPE + " TEXT," +
+                COLUMN_HIS_DATE + " TEXT);";
+
         db.execSQL(query);
         db.execSQL(query2);
+        db.execSQL(query3);
     }
 
     @Override
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
         String query= "DROP TABLE IF EXISTS " + TABLE_NAME;
         String query2= "DROP TABLE IF EXISTS " + TABLE_NAME2;
+        String query3= "DROP TABLE IF EXISTS " + TABLE_NAME3;
 
         db.execSQL(query);
         db.execSQL(query2);
+        db.execSQL(query3);
 
         onCreate(db);
     }
@@ -307,6 +323,55 @@ public class DBHandler extends SQLiteOpenHelper{
 
 
         return result;
+    }
+//============================================================================================================================================================
+    //add a new history to database
+    public void addHistory(History history){
+        ContentValues values = new ContentValues();
+        values.put(COLUMN_HIS_TYPE, history.get_hisType());
+        values.put(COLUMN_HIS_DATE, history.get_hisDate());
+
+        SQLiteDatabase db= getWritableDatabase();
+        db.insert(TABLE_NAME3,null,values);
+        db.close();
+    }
+
+    //delete a history from database
+    public void deleteHistory(int historyID){
+        SQLiteDatabase db= getWritableDatabase();
+        db.execSQL("DELETE FROM  "+TABLE_NAME3 +" WHERE "+COLUMN_HIS_ID + "=\"" +historyID +"\";");
+    }
+
+    //delete a history from database
+    public void deleteAllHistory(){
+        SQLiteDatabase db= getWritableDatabase();
+        db.execSQL("DELETE FROM  "+TABLE_NAME3 +";");
+    }
+
+    //retrieve all history from database
+    public List<History> getAllHistory(){
+        String query="SELECT * FROM "+TABLE_NAME3 +" WHERE 1 ORDER BY "+COLUMN_HIS_ID+" DESC;";
+        SQLiteDatabase db= getWritableDatabase();
+
+        List<History> records = new ArrayList<History>();
+        //cursor point to your location
+        Cursor cursor = db.rawQuery(query, null);
+        //move to first row in your result
+        cursor.moveToFirst();
+
+        while(!cursor.isAfterLast()){
+            if(cursor.getString(cursor.getColumnIndex("hisType")) != null){
+                History historyRecord = new History();
+                historyRecord.set_hisID(cursor.getInt(0));
+                historyRecord.set_hisType(cursor.getString(1));
+                historyRecord.set_hisDate(cursor.getString(2));
+
+                records.add(historyRecord);
+                cursor.moveToNext();
+            }
+        }
+        cursor.close();
+        return records;
     }
 
 }
