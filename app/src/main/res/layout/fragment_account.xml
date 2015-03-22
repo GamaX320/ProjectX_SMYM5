@@ -35,7 +35,7 @@
         android:layout_alignBottom="@+id/listView_account"
         android:layout_alignRight="@+id/listView_account"
         android:layout_alignEnd="@+id/listView_account"
-        android:background="#DEDEDE"
+        android:background="@android:color/transparent"
         android:layout_margin="1dp"
         android:clickable="true"
         android:scaleType="fitCenter"

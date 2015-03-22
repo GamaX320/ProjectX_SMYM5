@@ -48,7 +48,7 @@
         android:layout_height="wrap_content"
         android:id="@+id/imageButton_add_expense"
         android:src="@drawable/ic_add"
-        android:background="#DEDEDE"
+        android:background="@android:color/transparent"
         android:minHeight="80dp"
         android:minWidth="80dp"
         android:clickable="true"
