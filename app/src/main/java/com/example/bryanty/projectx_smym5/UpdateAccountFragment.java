@@ -63,8 +63,7 @@ public class UpdateAccountFragment extends Fragment  implements OnClickListener 
         Account account = new Account();
         dbHandler= new DBHandler(getActivity(),null,null,1);
         account= dbHandler.getAccount(accID);
-//        Log.v("MyActivity", "1=" + accID); //print message to console
-//        Log.v("MyActivity", "asdasdasd=" + account.get_accName()); //print message to console
+
         //load account information
         accName.setText(account.get_accName());
         accAmount.setText(""+account.get_accAmount());

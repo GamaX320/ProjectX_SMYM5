@@ -80,7 +80,6 @@ public class CreateExpenseFragment extends Fragment {
         radioButtonMonthly= (RadioButton)rootView.findViewById(R.id.radioButton_monthly);
         //default get today date
         Calendar c = Calendar.getInstance();
-        //SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd");
         SimpleDateFormat df = new SimpleDateFormat("yyyy-M-dd");
         formatedDate = df.format(c.getTime());
 
@@ -92,7 +91,7 @@ public class CreateExpenseFragment extends Fragment {
         spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener(){
             @Override
             public void  onItemSelected(AdapterView<?> parent,View view,int position,long id){
-                Toast.makeText(getActivity(),"item selected > "+parent.getItemAtPosition(position),Toast.LENGTH_SHORT).show();
+                //Toast.makeText(getActivity(),"item selected > "+parent.getItemAtPosition(position),Toast.LENGTH_SHORT).show();
                 expType= parent.getItemAtPosition(position).toString();
             }
 
@@ -128,11 +127,11 @@ public class CreateExpenseFragment extends Fragment {
                 @Override
                 public void onDateSet(DatePicker view, int year, int monthOfYear,
                                       int dayOfMonth) {
-                    Toast.makeText(
-                            getActivity(),
-                            String.valueOf(year) + "-" + String.valueOf(monthOfYear+1)
-                                    + "-" + String.valueOf(dayOfMonth),
-                            Toast.LENGTH_LONG).show();
+//                    Toast.makeText(
+//                            getActivity(),
+//                            String.valueOf(year) + "-" + String.valueOf(monthOfYear+1)
+//                                    + "-" + String.valueOf(dayOfMonth),
+//                            Toast.LENGTH_LONG).show();
 
                     SimpleDateFormat sdf = new SimpleDateFormat("d-MM-yyyy");
                   // formatedDate = String.valueOf(dayOfMonth)+"-"+ String.valueOf(monthOfYear+1)+"-"+ String.valueOf(year);
@@ -144,7 +143,8 @@ public class CreateExpenseFragment extends Fragment {
                         Date d = Calendar.getInstance().getTime(); // Current time
                         SimpleDateFormat sdf2 = new SimpleDateFormat("yyyy-MM-dd"); // Set your date format
                         String currentData = sdf2.format(d);
-                        Log.v("MyActivity", "day addasdsfsdf>>>>>>>>" +currentData); //print message to console
+
+                        //Log.v("MyActivity", "day addasdsfsdf>>>>>>>>" +formatedDate); //print message to console
 
                     } catch (ParseException e) {
                         // TODO Auto-generated catch block
@@ -160,7 +160,7 @@ public class CreateExpenseFragment extends Fragment {
 
             @Override
             public void onCheckedChanged(RadioGroup group, int checkedId) {
-                Log.d("chk", "id" + checkedId);
+                //Log.d("chk", "id" + checkedId);
 
                 if (checkedId == R.id.radioButton_weekly) {
                     //min 1, max 4 because 1 month only 4 weeks
@@ -203,8 +203,6 @@ public class CreateExpenseFragment extends Fragment {
                     expAmmount.setHintTextColor(Color.RED);
                 }
                 else{
-//                Expense expense=new Expense(expType,Double.parseDouble(expAmmount.getText().toString()),formatedDate,accID);
-
                // int repeat = Integer.parseInt(expTimes.getText().toString());
                 int repeat = 1;
 
@@ -216,27 +214,12 @@ public class CreateExpenseFragment extends Fragment {
                     repeat= 1;
                 }
 
-                Log.v("MyActivity", "repeat=" + repeat); //print message to console
-
-//                ///////////////
-//                //add more date
-//                String dt = "2012-01-31";  // Start date
-//                SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
-//                Calendar c = Calendar.getInstance();
-//                try {
-//                    c.setTime(sdf.parse(dt));
-//                } catch (ParseException e) {
-//                    e.printStackTrace();
-//                }
-//                c.add(Calendar.DATE, 7);  // number of days to add, can also use Calendar.DAY_OF_MONTH in place of Calendar.DATE
-//                String output = sdf.format(c.getTime());
-
-//                formatedDate= addMoreDay(formatedDate,dayAfter);exi
+                //Log.v("MyActivity", "repeat=" + repeat); //print message to console
 
                 boolean result = false;
 
                 for(int a=1; a<= repeat; a++){
-                    Log.v("MyActivity", "day add=" +formatedDate); //print message to console
+                    //Log.v("MyActivity", "day add=" +formatedDate); //print message to console
                     Expense expense=new Expense(expType,Double.parseDouble(expAmmount.getText().toString()),formatedDate,accID);
 
                     dbHandler.addExpense(expense);

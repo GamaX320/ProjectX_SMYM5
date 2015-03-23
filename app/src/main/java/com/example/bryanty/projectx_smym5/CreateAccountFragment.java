@@ -72,9 +72,8 @@ public class CreateAccountFragment extends Fragment implements OnClickListener {
                 else {
                     Account account = new Account(accName.getText().toString(), selectedAvatar, Double.parseDouble(accAmount.getText().toString()));
                     dbHandler.addAccount(account);
-                    Log.v("MyActivity", "index=" + Double.parseDouble(accAmount.getText().toString())); //print message to console
+                   // Log.v("MyActivity", "index=" + Double.parseDouble(accAmount.getText().toString())); //print message to console
                     Toast.makeText(getActivity(), "Successful create account", Toast.LENGTH_LONG).show();
-                    //printDatabase();
 
                     //add new history
                     //default get today date
@@ -90,7 +89,7 @@ public class CreateAccountFragment extends Fragment implements OnClickListener {
                     FragmentManager fragmentManager = getFragmentManager();
                     fragmentManager.beginTransaction()
                             .replace(R.id.container, objFragment)
-                            .addToBackStack(null)
+                            //.addToBackStack(null)
                             .commit();
 
                 }
@@ -122,7 +121,7 @@ public class CreateAccountFragment extends Fragment implements OnClickListener {
                 FragmentManager fragmentManager = getFragmentManager();
                 fragmentManager.beginTransaction()
                         .replace(R.id.container,objFragment)
-                        .addToBackStack(null)
+                        //.addToBackStack(null)
                         .commit();
             }
         });
@@ -137,13 +136,21 @@ public class CreateAccountFragment extends Fragment implements OnClickListener {
     public void onClick(View v) {
         // default method for handling onClick Events..
 
-        btnAvatar1.setBackgroundColor(Color.parseColor("#DEDEDE"));
-        btnAvatar2.setBackgroundColor(Color.parseColor("#DEDEDE"));
-        btnAvatar3.setBackgroundColor(Color.parseColor("#DEDEDE"));
-        btnAvatar4.setBackgroundColor(Color.parseColor("#DEDEDE"));
-        btnAvatar5.setBackgroundColor(Color.parseColor("#DEDEDE"));
-        btnAvatar6.setBackgroundColor(Color.parseColor("#DEDEDE"));
-        btnAvatar7.setBackgroundColor(Color.parseColor("#DEDEDE"));
+//        btnAvatar1.setBackgroundColor(Color.parseColor("#DEDEDE"));
+//        btnAvatar2.setBackgroundColor(Color.parseColor("#DEDEDE"));
+//        btnAvatar3.setBackgroundColor(Color.parseColor("#DEDEDE"));
+//        btnAvatar4.setBackgroundColor(Color.parseColor("#DEDEDE"));
+//        btnAvatar5.setBackgroundColor(Color.parseColor("#DEDEDE"));
+//        btnAvatar6.setBackgroundColor(Color.parseColor("#DEDEDE"));
+//        btnAvatar7.setBackgroundColor(Color.parseColor("#DEDEDE"));
+
+        btnAvatar1.setBackgroundColor(Color.TRANSPARENT);
+        btnAvatar2.setBackgroundColor(Color.TRANSPARENT);
+        btnAvatar3.setBackgroundColor(Color.TRANSPARENT);
+        btnAvatar4.setBackgroundColor(Color.TRANSPARENT);
+        btnAvatar5.setBackgroundColor(Color.TRANSPARENT);
+        btnAvatar6.setBackgroundColor(Color.TRANSPARENT);
+        btnAvatar7.setBackgroundColor(Color.TRANSPARENT);
 
         switch(v.getId()){
             case R.id.imageButtonAvatar1:
@@ -176,19 +183,7 @@ public class CreateAccountFragment extends Fragment implements OnClickListener {
                 break;
         }
 
-        Log.v("MyActivity", "selected=" + selectedAvatar); //print message to console
+       // Log.v("MyActivity", "selected=" + selectedAvatar); //print message to console
     }
 
-    public void printDatabase(){
-        TextView abc;
-
-        List<Account> values = dbHandler.getAllAccount();
-
-//        while(values != null){
-//            abc.setText(values.toString());
-//        }
-
-        accName.setText("");
-        accAmount.setText("");
-    }
 }

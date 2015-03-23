@@ -214,12 +214,11 @@ public class UpdateExpenseFragment extends Fragment {
 //                        repeat= 1;
 //                    }
 
-                    Log.v("MyActivity", "repeat=" + repeat); //print message to console
+                   // Log.v("MyActivity", "repeat=" + repeat); //print message to console
 
                     boolean result = false;
 
-//                    for(int a=1; a<= repeat; a++){
-                        Log.v("MyActivity", "day add=" +formatedDate); //print message to console
+                        //Log.v("MyActivity", "day add=" +formatedDate); //print message to console
                         Expense expense=new Expense(expID,expType,Double.parseDouble(expAmmount.getText().toString()),formatedDate,accID);
 
                         dbHandler.updateExpense(expense);
@@ -235,11 +234,6 @@ public class UpdateExpenseFragment extends Fragment {
                         account.set_accAmount(newAmount);
                         result = dbHandler.updateAccount(account,1);
 
-//                        if(dayAfter > 0) {
-//                            formatedDate = addMoreDay(formatedDate, dayAfter);
-//                            //Log.v("MyActivity", "day add=" +formatedDate); //print message to console
-//                        }
-//                    }
 
                     if(result == true){
                         Toast.makeText(getActivity(), "Successful create expense" , Toast.LENGTH_LONG).show();

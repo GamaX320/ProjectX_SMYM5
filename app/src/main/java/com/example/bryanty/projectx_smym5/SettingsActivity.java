@@ -43,6 +43,23 @@ public class SettingsActivity extends ActionBarActivity implements View.OnClickL
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_settings);
 
+        //load settings
+        String colorString="#3F51B5";
+        String FILENAME ="settings_file";
+        try{
+            FileInputStream fis=openFileInput(FILENAME);
+            byte[] reader = new byte[fis.available()];
+
+            while(fis.read(reader)!= -1){
+
+            }
+            colorString= findColor(Integer.parseInt(new String(reader)));
+            fis.close();
+        }catch (Exception e) {
+            //Toast.makeText(this,"Unable read settings",Toast.LENGTH_LONG).show();
+            e.printStackTrace();
+        }
+
         btnSave=(Button)findViewById(R.id.button_Save);
         btnColor1=(ImageButton)findViewById(R.id.button_color_1);
         btnColor2=(ImageButton)findViewById(R.id.button_color_2);
@@ -60,8 +77,9 @@ public class SettingsActivity extends ActionBarActivity implements View.OnClickL
         btnColor6.setOnClickListener(this);
         btnColor7.setOnClickListener(this);
 
-        //setTitle("Settings");
         mToolbar = (Toolbar) findViewById(R.id.toolbar_actionbar);
+        //load color
+        mToolbar.setBackgroundColor(Color.parseColor(colorString));
         setSupportActionBar(mToolbar);
         getSupportActionBar().setDisplayShowHomeEnabled(true);
     }
@@ -169,5 +187,38 @@ public class SettingsActivity extends ActionBarActivity implements View.OnClickL
     @Override
     public void onNavigationDrawerItemSelected(int position) {
 
+    }
+
+    //load settings file
+    public String findColor(int selectedColor){
+        String colorString="#3F51B5";
+
+        switch (selectedColor){
+            case 1:
+                colorString="#3F51B5";
+                break;
+            case 2:
+                colorString="#E91E63";
+                break;
+            case 3:
+                colorString="#9C27B0";
+                break;
+            case 4:
+                colorString="#2196F3";
+                break;
+            case 5:
+                colorString="#009688";
+                break;
+            case 6:
+                colorString="#FF9800";
+                break;
+            case 7:
+                colorString="#607D8B";
+                break;
+            default:
+                colorString="#3F51B5";
+                break;
+        }
+        return colorString;
     }
 }

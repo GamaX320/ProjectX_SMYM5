@@ -47,7 +47,7 @@ public class AccountFragment extends Fragment {
 
         //custom adapter
         ListAdapter accountAdapter=new AccountRowAdapter(getActivity().getApplicationContext(), account);
-    final    ListView accountListView=(ListView)rootView.findViewById(R.id.listView_account);
+        final ListView accountListView=(ListView)rootView.findViewById(R.id.listView_account);
         accountListView.setAdapter(accountAdapter);
 
         //listview listener
@@ -60,9 +60,8 @@ public class AccountFragment extends Fragment {
                 Toast.makeText(getActivity(), "Click ListItem Number " + position, Toast.LENGTH_LONG).show();
 
                 Account myAccount= account.get(position);
-                Log.v("MyActivity", "acc=" +myAccount.get_accID()); //print message to console
+               // Log.v("MyActivity", "acc=" +myAccount.get_accID()); //print message to console
 
-                /////
                 Fragment objFragment=new UpdateAccountFragment();
                 //pass value to another fragment
                 Bundle bundle = new Bundle();
@@ -120,7 +119,6 @@ public class AccountFragment extends Fragment {
                         ListAdapter accountAdapter=new AccountRowAdapter(getActivity().getApplicationContext(), account);
                         ListView accountListView=(ListView)rootView.findViewById(R.id.listView_account);
                         accountListView.setAdapter(accountAdapter);
-
 
                         //add new history
                         //default get today date

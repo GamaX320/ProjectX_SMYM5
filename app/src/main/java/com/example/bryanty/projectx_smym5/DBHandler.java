@@ -246,7 +246,9 @@ public class DBHandler extends SQLiteOpenHelper{
     //retrieve all expense from one account
     public List<Expense> getExpense(int accountID){
        // String query="SELECT * FROM "+TABLE_NAME2 +" WHERE "+COLUMN_EXP_ACC_ID + "=\"" +accountID +"\";";
-        String query="SELECT * FROM "+TABLE_NAME2 +" WHERE "+COLUMN_EXP_ACC_ID + "=\"" +accountID +"\" ORDER BY substr(expDate, 7, 4) DESC,substr(expDate, 4, 2) DESC,substr(expDate, 1, 2) DESC;";
+       String query="SELECT * FROM "+TABLE_NAME2 +" WHERE "+COLUMN_EXP_ACC_ID + "=\"" +accountID +"\" ORDER BY substr(expDate, 7, 4) DESC,substr(expDate, 4, 2) DESC,substr(expDate, 1, 2) DESC;";
+        //String query="SELECT * FROM "+TABLE_NAME2 +" WHERE "+COLUMN_EXP_ACC_ID + "=\"" +accountID +"\" ORDER BY substr(expDate, 0,4) DESC,substr(expDate, 5,2) DESC,substr(expDate, 7,3) DESC;";
+
 
         SQLiteDatabase db= getWritableDatabase();
 

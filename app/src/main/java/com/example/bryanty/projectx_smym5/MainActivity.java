@@ -13,6 +13,8 @@ import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.Window;
+import android.view.WindowManager;
 import android.widget.Toast;
 
 import java.io.FileInputStream;
@@ -70,12 +72,8 @@ public class MainActivity extends ActionBarActivity implements NavigationDrawerC
 
         switch(item.getItemId()){
             case R.id.action_settings:
-//                Intent intent=new Intent(this,SettingsActivity.class);
-//                startActivity(intent);
-
                 Intent intent = new Intent();
                 intent.setClass(this,SettingsActivity.class);
-//                intent.setClass(this,SetPreferenceActivity.class);
                 startActivity(intent);
             break;
 
@@ -89,7 +87,7 @@ public class MainActivity extends ActionBarActivity implements NavigationDrawerC
 
     @Override
     public void onNavigationDrawerItemSelected(int position) {
-        Toast.makeText(this, "Menu item selected -> " + position, Toast.LENGTH_SHORT).show();
+       // Toast.makeText(this, "Menu item selected -> " + position, Toast.LENGTH_SHORT).show();
         //add custom navigation drawer
         Fragment objFragment=null;
         switch(position){
@@ -113,6 +111,7 @@ public class MainActivity extends ActionBarActivity implements NavigationDrawerC
         FragmentManager fragmentManager = getSupportFragmentManager();
         fragmentManager.beginTransaction()
                 .replace(R.id.container,objFragment)
+                .addToBackStack(null)
                 .commit();
     }
 

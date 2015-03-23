@@ -89,7 +89,7 @@ public class ExpenseDownFragment extends Fragment {
                         //do your work here
                         //load all account from database
                         dbHandler= new DBHandler(getActivity(),null,null,1);
-                        Log.v("MyActivity", "exp id to delete=" +expense.get(tempPosition).get_expID()); //print message to console
+                        //Log.v("MyActivity", "exp id to delete=" +expense.get(tempPosition).get_expID()); //print message to console
                         dbHandler.deleteExpense(expense.get(tempPosition).get_expID());
 
                         //refresh list view
@@ -137,9 +137,4 @@ public class ExpenseDownFragment extends Fragment {
 
         return rootView;
     }
-
-//    //get data from another fragment
-//    public void getData(String message){
-//        Toast.makeText(getActivity(), "this is the message u find so long > " + message, Toast.LENGTH_SHORT).show();
-//    }
 }
