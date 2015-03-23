@@ -18,10 +18,12 @@
     <string name="drawer_close">菜单关闭</string>
     <string name="about_us">关于我们</string>
     <string name="title_account">帐户</string>
+    <string name="title_history">历史</string>
     <string name="title_expense">费用</string>
     <string name="title_activity_create_account">创建账户</string>
     <string name="title_create_account">创建账户</string>
     <string name="title_activity_create_expense">创建费用</string>
+    <string name="title_update_expense">更新费用</string>
     <string name="title_create_expense">创建费用</string>
     <string name="title_create_expense_once">一旦</string>
     <string name="title_create_expense_daily">日报</string>
@@ -74,7 +76,7 @@
     <string name="title_ViewSub">视图 :</string>
     <string name="displayDate" />
     <string name="displayDateRange">日期 :</string>
-
+    <string name="title_View">视图:</string>
 
     <string-array name="Type_report_view">
         <item>今日</item>

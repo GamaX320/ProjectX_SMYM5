@@ -18,9 +18,11 @@
     <string name="drawer_close">Menu ditutup</string>
     <string name="about_us">Mengenai Kami</string>
     <string name="title_account">Akaun</string>
+    <string name="title_history">Sejarah</string>
     <string name="title_expense">Perbelanjaan</string>
     <string name="title_activity_create_account">BuatAkaun</string>
     <string name="title_create_account">Buat Akaun</string>
+    <string name="title_update_expense">Update Perbelanjaan</string>
     <string name="title_activity_create_expense">BuatPerbelanjaan</string>
     <string name="title_create_expense">Buat Perbelanjaan</string>
     <string name="title_create_expense_once">Sekali</string>
@@ -73,6 +75,7 @@
     <string name="title_ViewSub">Lihat :</string>
     <string name="displayDate" />
     <string name="displayDateRange">Tarikh :</string>
+    <string name="title_View">Lihat:</string>
 
     <string-array name="Type_report_view">
         <item>Hari ini</item>
